@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.WebApplication", "ITS.PWIIOT.SmartClassrooms.WebApplication\ITS.PWIIOT.SmartClassrooms.WebApplication.csproj", "{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.Domain", "ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj", "{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.ApplicationCore", "ITS.PWIIOT.SmartClassrooms.ApplicationCore\ITS.PWIIOT.SmartClassrooms.ApplicationCore.csproj", "{B27D19A2-3BCB-4C44-8613-14662C2DDD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.DTO", "ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj", "{0059CDB4-EBAB-47EF-8653-D206F1B78D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.Infrastructure", "ITS.PWIIOT.SmartClassrooms.Infrastructure\ITS.PWIIOT.SmartClassrooms.Infrastructure.csproj", "{8AE8BE78-898C-448A-B5B6-677A4C04738B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B27D19A2-3BCB-4C44-8613-14662C2DDD73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27D19A2-3BCB-4C44-8613-14662C2DDD73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27D19A2-3BCB-4C44-8613-14662C2DDD73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27D19A2-3BCB-4C44-8613-14662C2DDD73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0059CDB4-EBAB-47EF-8653-D206F1B78D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0059CDB4-EBAB-47EF-8653-D206F1B78D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0059CDB4-EBAB-47EF-8653-D206F1B78D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0059CDB4-EBAB-47EF-8653-D206F1B78D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFD0D65B-AF7F-4B8E-A0C4-3CE4033B1A30}
+	EndGlobalSection
+EndGlobal
