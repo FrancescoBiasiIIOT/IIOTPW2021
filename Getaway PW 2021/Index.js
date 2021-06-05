@@ -38,5 +38,3 @@ client.on('error', function (err) {
     console.error(err.message);
     process.exit(-1);
 });
-
-//------------------------------------------------------
