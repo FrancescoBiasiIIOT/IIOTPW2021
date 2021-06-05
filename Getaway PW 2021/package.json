@@ -9,6 +9,7 @@
     "mqtt": "^4.2.6",
     "serialport": "^9.1.0"
   },
-  "author": "Valerio Anzilotti",
+
+  "author": "Gruppo Its",
   "license": "ISC"
 }
