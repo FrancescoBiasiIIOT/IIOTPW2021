@@ -9,7 +9,6 @@
     "mqtt": "^4.2.6",
     "serialport": "^9.1.0"
   },
-
-  "author": "Gruppo Its",
+  "author": "Gruppo Its2021",
   "license": "ISC"
 }
