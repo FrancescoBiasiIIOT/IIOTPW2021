@@ -1,0 +1,14 @@
+{
+  "name": "getaway-pw",
+  "version": "1.0.0",
+  "description": "Getaway per il PW",
+  "main": "Index.js",
+  "dependencies": {
+    "azure-iot-device": "^1.17.3",
+    "azure-iothub": "^1.14.0",
+    "mqtt": "^4.2.6",
+    "serialport": "^9.1.0"
+  },
+  "author": "Valerio Anzilotti",
+  "license": "ISC"
+}
