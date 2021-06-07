@@ -1,4 +1,5 @@
-﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
+﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
@@ -14,6 +16,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
     {
         private readonly ILessonRepository lessonRepository;
         private readonly ITeacherRepository teacherRepository;
+        private readonly IIotHubService iotHubService;
         private readonly IClassroomRepository  classroomRepository;
         private readonly ILogger<IndexModel> _logger;
         public IEnumerable<Lesson> Lessons { get; set; }
@@ -23,7 +26,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         public IEnumerable<Teacher> Teachers { get; set; }
         public IEnumerable<Classrooms> Classrooms { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository)
+        public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository, IIotHubService iotHubService)
         {
             _logger = logger;
             this.lessonRepository = lessonRepository;
@@ -34,6 +37,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
             Classrooms = new List<Classrooms>();
             Lesson = new();
             this.classroomRepository = classroomRepository;
+            this.iotHubService = iotHubService;
         }
 
         public async Task OnGet()
@@ -53,6 +57,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
             Lesson.Teacher = teacher;
             Lesson.Classroom = classroom;
             lessonRepository.InsertLesson(Lesson);
+            iotHubService.SendMessageToDevice(JsonSerializer.Serialize(Lesson),"RB100");
             return Page();
         }
     }
