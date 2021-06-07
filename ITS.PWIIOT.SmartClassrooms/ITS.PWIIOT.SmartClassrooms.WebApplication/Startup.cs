@@ -1,4 +1,6 @@
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure;
+using ITS.PWIIOT.SmartClassrooms.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,9 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
+            services.AddScoped<ILessonRepository, LessonRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Northwind"))); //questo permette di fare richieste
         }
 

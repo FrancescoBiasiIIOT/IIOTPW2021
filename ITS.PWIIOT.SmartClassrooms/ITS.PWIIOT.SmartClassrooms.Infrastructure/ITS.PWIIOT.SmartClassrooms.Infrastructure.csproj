@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.ApplicationCore\ITS.PWIIOT.SmartClassrooms.ApplicationCore.csproj" />
     <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj" />
   </ItemGroup>
 

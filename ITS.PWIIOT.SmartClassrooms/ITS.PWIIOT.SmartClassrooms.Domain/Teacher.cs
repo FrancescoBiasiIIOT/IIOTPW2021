@@ -19,5 +19,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public string Surname { get; set; }
         [Required]
         public DateTime Date { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
     }
 }
