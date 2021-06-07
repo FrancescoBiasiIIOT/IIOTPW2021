@@ -18,12 +18,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             _smartClassesContext = smartClassesContext;
         }
 
-        public async Task<Subject> GetSubjectById(Guid id)
-        {
-            return await _smartClassesContext.
-            Subjects.Where(t => t.Id == id)
-            .FirstOrDefaultAsync();
-        }
         public async Task<IEnumerable<Teacher>> GetTeachers()
         {
             var teachers = await _smartClassesContext.Teachers
@@ -38,11 +32,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             return await _smartClassesContext.
                 Teachers.Where(t => t.Id == id)
                 .FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<Subject>> GetSubjects()
-        {
-            return await _smartClassesContext.Subjects.ToListAsync();
         }
     }
 }

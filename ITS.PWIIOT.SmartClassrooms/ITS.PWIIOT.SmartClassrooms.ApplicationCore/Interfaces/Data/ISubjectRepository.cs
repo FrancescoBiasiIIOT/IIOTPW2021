@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
-    public interface ITeacherRepository
+    public interface ISubjectRepository
     {
-        public Task<IEnumerable<Teacher>> GetTeachers();
-        public Task<Teacher> GetTeacherById(Guid id);
-
+        public Task<IEnumerable<Subject>> GetSubjects();
+        public Task<Subject> GetSubjectById(Guid id);
     }
 }

@@ -20,8 +20,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services
         }
         public async Task<string> ReceiveMessageFromHub(string deviceId)
         {
-            TimeSpan s_receiveTimeout = TimeSpan.FromSeconds(1);
-            var deviceConnectionString = "HostName=ProjectWorkHub.azure-devices.net;DeviceId=RB100;SharedAccessKey=D5b4w4vff+hf5ocafWsJ8IDtxGdVlSnlZpBPFnHDyMc=";
+            var deviceConnectionString = "";
             var deviceClient = DeviceClient.CreateFromConnectionString(
                    deviceConnectionString,
                    Microsoft.Azure.Devices.Client.TransportType.Mqtt);

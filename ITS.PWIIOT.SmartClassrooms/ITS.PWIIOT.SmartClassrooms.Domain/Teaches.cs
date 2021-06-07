@@ -12,6 +12,5 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
     public class Teaches : EntityBase<Guid>
     {
         public Subject Subject { get; set; }
-        public Teacher Teacher { get; set; }
     }
 }

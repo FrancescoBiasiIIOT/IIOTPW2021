@@ -1,10 +1,11 @@
 /* BUILDINGS */
-CREATE TABLE [dbo].[Buildings]
-(
-    [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Building_Name] NVARCHAR(10) NOT NULL, 
-    [Description] NVARCHAR(150) NULL
-)
+CREATE TABLE [dbo].[Buildings] (
+    [Id]            UNIQUEIDENTIFIER NOT NULL,
+    [Name] NVARCHAR (10)    NOT NULL,
+    [Description]   NVARCHAR (150)   NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
 
 /* FloorsBuilding */
 
@@ -12,33 +13,40 @@ CREATE TABLE [dbo].[FloorsBuilding]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [BuildingId] UNIQUEIDENTIFIER NOT NULL, 
-    [Floor] SMALLINT NOT NULL, 
+    [Floor] INT NOT NULL, 
     CONSTRAINT [FK_FloorsBuilding_ToBuilding] FOREIGN KEY ([BuildingId]) REFERENCES [Buildings]([Id])
 
 )
 
 /* Classrooms */
 
-CREATE TABLE [dbo].[Classrooms]
-(
-    [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Name] NVARCHAR(10) NOT NULL, 
-    [State] SMALLINT NOT NULL, 
-    [Capacity] INT NULL, 
-    [FloorId] UNIQUEIDENTIFIER NOT NULL, 
-    CONSTRAINT [FK_Classrooms_ToFloorsBuilding] FOREIGN KEY ([FloorId]) REFERENCES [FloorsBuilding]([Id])
-)
+CREATE TABLE [dbo].[Classrooms] (
+    [Id]       UNIQUEIDENTIFIER NOT NULL,
+    [Name]     NVARCHAR (10)    NOT NULL,
+    [State]    INT              NOT NULL,
+    [Capacity] INT              NULL,
+    [Floor]  INT NOT NULL,
+    [BuildingId] UNIQUEIDENTIFIER NOT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC), 
+    CONSTRAINT [FK_Classrooms_Building] FOREIGN KEY ([BuildingId]) REFERENCES [Buildings]([Id]),
+);
+
+
+
+
+
 
 /* Gateways */
 
-
-CREATE TABLE [dbo].[Gateways]
-(
-    [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [GatewayId] VARCHAR(10) UNIQUE NOT NULL, 
-    [FloorId] UNIQUEIDENTIFIER NOT NULL, 
-    CONSTRAINT [FK_Gateways_ToFloorBuildings] FOREIGN KEY ([FloorId]) REFERENCES [FloorsBuilding]([Id])
-)
+CREATE TABLE [dbo].[Gateways] (
+    [Id]        UNIQUEIDENTIFIER NOT NULL,
+    [GatewayId] VARCHAR (10)     NOT NULL,
+    [BuildingId]   UNIQUEIDENTIFIER NOT NULL,
+    [Floor] INT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    UNIQUE NONCLUSTERED ([GatewayId] ASC), 
+    CONSTRAINT [FK_Gateways_ToBuilding] FOREIGN KEY ([BuildingId]) REFERENCES [Buildings]([Id])
+);
 
 /* Microcontrollers */
 

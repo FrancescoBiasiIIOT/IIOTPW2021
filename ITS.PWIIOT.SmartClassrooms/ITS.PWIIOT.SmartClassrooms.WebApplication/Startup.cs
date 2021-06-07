@@ -37,6 +37,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IIotHubService, IotHubService>();
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }

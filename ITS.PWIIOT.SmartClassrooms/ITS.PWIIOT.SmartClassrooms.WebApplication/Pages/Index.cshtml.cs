@@ -18,6 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         private readonly ITeacherRepository teacherRepository;
         private readonly IIotHubService iotHubService;
         private readonly IClassroomRepository  classroomRepository;
+        private readonly ISubjectRepository  subjectRepository;
         private readonly ILogger<IndexModel> _logger;
         public IEnumerable<Lesson> Lessons { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
@@ -26,7 +27,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         public IEnumerable<Teacher> Teachers { get; set; }
         public IEnumerable<Classrooms> Classrooms { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository, IIotHubService iotHubService)
+        public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository, IIotHubService iotHubService, ISubjectRepository subjectRepository)
         {
             _logger = logger;
             this.lessonRepository = lessonRepository;
@@ -38,6 +39,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
             Lesson = new();
             this.classroomRepository = classroomRepository;
             this.iotHubService = iotHubService;
+            this.subjectRepository = subjectRepository;
         }
 
         public async Task OnGet()
@@ -45,19 +47,19 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
             Lesson = new();
             Lessons = lessonRepository.GetLessons(new DateTime(2021,05,05), new DateTime(2021,12,30));
             Teachers = await teacherRepository.GetTeachers();
-            Subjects = await teacherRepository.GetSubjects();
+            Subjects = await subjectRepository.GetSubjects();
             Classrooms = await classroomRepository.GetClassrooms();
         }
         public async Task<IActionResult> OnPost()
         {
             var classroom = await classroomRepository.GetClassroomById(Lesson.ClassroomId); 
             var teacher = await teacherRepository.GetTeacherById(Lesson.TeacherId);
-            var subject = await teacherRepository.GetSubjectById(Lesson.SubjectId);
+            var subject = await subjectRepository.GetSubjectById(Lesson.SubjectId);
             Lesson.Subject = subject;
             Lesson.Teacher = teacher;
             Lesson.Classroom = classroom;
             lessonRepository.InsertLesson(Lesson);
-            iotHubService.SendMessageToDevice(JsonSerializer.Serialize(Lesson),"RB100");
+        //    iotHubService.SendMessageToDevice(JsonSerializer.Serialize(Lesson),"RB100");
             return Page();
         }
     }
