@@ -3,6 +3,7 @@ using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure.Data;
+using ITS.PWIIOT.SmartClassrooms.WebApplication.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddHostedService<ReceiverWorker>();
+            services.AddHostedService<SchedulerWorker>();
             services.AddScoped<IBuildingRepository, BuildingRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
@@ -62,6 +65,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
