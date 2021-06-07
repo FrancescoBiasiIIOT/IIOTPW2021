@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-ITS.PWIIOT.SmartClassrooms.TestWorker-6E279971-417C-4714-8623-FCFB51C67491</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.ApplicationCore\ITS.PWIIOT.SmartClassrooms.ApplicationCore.csproj" />
+  </ItemGroup>
+</Project>

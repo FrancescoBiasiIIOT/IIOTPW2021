@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.WebApplication", "ITS.PWIIOT.SmartClassrooms.WebApplication\ITS.PWIIOT.SmartClassrooms.WebApplication.csproj", "{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.WebApplication", "ITS.PWIIOT.SmartClassrooms.WebApplication\ITS.PWIIOT.SmartClassrooms.WebApplication.csproj", "{1FDCFCEA-F9AB-4673-B446-7090FF2584DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.Domain", "ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj", "{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.Domain", "ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj", "{AAE6957A-2EDE-4F4B-9E63-AA627456AACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.ApplicationCore", "ITS.PWIIOT.SmartClassrooms.ApplicationCore\ITS.PWIIOT.SmartClassrooms.ApplicationCore.csproj", "{B27D19A2-3BCB-4C44-8613-14662C2DDD73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.ApplicationCore", "ITS.PWIIOT.SmartClassrooms.ApplicationCore\ITS.PWIIOT.SmartClassrooms.ApplicationCore.csproj", "{B27D19A2-3BCB-4C44-8613-14662C2DDD73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.DTO", "ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj", "{0059CDB4-EBAB-47EF-8653-D206F1B78D52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.DTO", "ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj", "{0059CDB4-EBAB-47EF-8653-D206F1B78D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.Infrastructure", "ITS.PWIIOT.SmartClassrooms.Infrastructure\ITS.PWIIOT.SmartClassrooms.Infrastructure.csproj", "{8AE8BE78-898C-448A-B5B6-677A4C04738B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.Infrastructure", "ITS.PWIIOT.SmartClassrooms.Infrastructure\ITS.PWIIOT.SmartClassrooms.Infrastructure.csproj", "{8AE8BE78-898C-448A-B5B6-677A4C04738B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.TestWorker", "ITS.PWIIOT.SmartClassrooms.TestWorker\ITS.PWIIOT.SmartClassrooms.TestWorker.csproj", "{2FCD4E6F-D030-473C-858A-B15E1A159C9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
