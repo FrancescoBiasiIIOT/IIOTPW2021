@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
-    [Table("Buildings")]
-    public class Building : EntityBase<Guid>
+    [Table("Microcontrollers")]
+    public class Microcontroller : EntityBase<Guid>
     {
         [Required]
         [MinLength(1), MaxLength(10)]
-        public string BuildingName { get; set; }
-        [MinLength(5), MaxLength(150)]
-        public string Description { get; set; }
+        public string DeviceId { get; set; }
     }
 }
