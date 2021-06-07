@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
-    [Table("Getaways")]
-    public class Getaways : EntityBase<Guid>
+    [Table("Gataways")]
+    public class Gateway : EntityBase<Guid>
     {
         [Required]
         [MinLength(1), MaxLength(10)]
         public string GatewayId { get; set; }
+        public FloorsBuilding Floor { get; set; }
     }
 }
