@@ -18,11 +18,8 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public string Name { get; set; }
 
         [Required]
-        [MinLength(1), MaxLength(2)]
-        public ClassroomState State { get; set; }
-
+        public Int16 State { get; set; }
         public int Capacity { get; set; }
-        public FloorsBuilding Floor { get; set; }
     }
     public enum ClassroomState
     {

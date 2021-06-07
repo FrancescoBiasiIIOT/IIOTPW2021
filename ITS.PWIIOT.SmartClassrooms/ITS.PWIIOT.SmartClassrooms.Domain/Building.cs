@@ -16,6 +16,5 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public string BuildingName { get; set; }
         [MinLength(5), MaxLength(150)]
         public string Description { get; set; }
-        public IEnumerable<Classrooms> Classrooms { get; set; }
     }
 }

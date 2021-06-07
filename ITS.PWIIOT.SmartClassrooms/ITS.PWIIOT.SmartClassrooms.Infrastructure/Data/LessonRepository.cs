@@ -34,7 +34,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                 .Include(l => l.Classroom)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
-                .Where(l => l.StartDate >= start && l.GetEndDate(l.Duration) <= end)
+                .Where(l => l.StartDate >= start)
                 .ToList();
 
             return lessons;
@@ -46,8 +46,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                 .Include(l => l.Classroom)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
-                .Where(l => l.StartDate >= start && l.GetEndDate(l.Duration) <= end
-                    && l.Classroom.Id == classroomId)
+                .Where(l => l.StartDate >= start)
                 .ToList();
 
             return lessons;

@@ -14,7 +14,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure
         {
 
         }
-        public DbSet<Building> Buildings{ get; set; }
+        public DbSet<Building> Buildings { get; set; }
         public DbSet<Classrooms> Classrooms { get; set; }
         public DbSet<FloorsBuilding> FloorBuildings { get; set; }
         public DbSet<Gateway> Gateways { get; set; }
@@ -23,6 +23,10 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Teaches> Teaches { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
     }
 }
 

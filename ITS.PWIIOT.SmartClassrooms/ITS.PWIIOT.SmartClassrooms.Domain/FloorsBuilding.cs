@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
-    [Table("FloorBuildings")]
+    [Table("FloorsBuilding")]
     public class FloorsBuilding : EntityBase<Guid>
     {
         [Required]
-        [MinLength(1), MaxLength(2)]
         public FloorState Floor { get; set; }
         public Building Building { get; set; }
+        public Guid BuildingId { get; set; }
 
     }
     public enum FloorState

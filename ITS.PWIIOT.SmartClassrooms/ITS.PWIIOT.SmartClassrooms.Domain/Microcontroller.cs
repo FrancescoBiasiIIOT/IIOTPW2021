@@ -15,6 +15,8 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         [MinLength(1), MaxLength(10)]
         public string DeviceId { get; set; }
         public Classrooms Classroom { get; set; }
+        public Guid ClassroomId { get; set; }
         public Gateway Gateway { get; set; }
+        public Guid GatewayId { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
     public abstract class EntityBase<T>
     {
+        [Key]
         [Required]
         public T Id { get; set; }
     }

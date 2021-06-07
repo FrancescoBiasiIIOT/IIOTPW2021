@@ -31,7 +31,8 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<IBuildingRepository, BuildingRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
-            services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Northwind"))); //questo permette di fare richieste
+            services.AddScoped<IClassroomRepository, ClassroomRepository>();
+            services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

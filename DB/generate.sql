@@ -74,12 +74,15 @@ CREATE TABLE [dbo].[Teachers]
 
 /* Teaches */
 
-CREATE TABLE [dbo].[Teaches]
-(
-    [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [TeacherId] UNIQUEIDENTIFIER NOT NULL, 
-    CONSTRAINT [FK_Teachers_ToTeacher] FOREIGN KEY ([TeacherId]) REFERENCES [Teachers]([Id]), 
-)
+CREATE TABLE [dbo].[Teaches] (
+    [Id]        UNIQUEIDENTIFIER NOT NULL,
+    [TeacherId] UNIQUEIDENTIFIER NOT NULL,
+    [SubjectId] UNIQUEIDENTIFIER NOT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Teachers_ToTeacher] FOREIGN KEY ([TeacherId]) REFERENCES [dbo].[Teachers] ([Id]), 
+    CONSTRAINT [FK_Teaches_ToSubject] FOREIGN KEY ([SubjectId]) REFERENCES [Subjects]([Id])
+);
+
 
 /* Lessons */
 

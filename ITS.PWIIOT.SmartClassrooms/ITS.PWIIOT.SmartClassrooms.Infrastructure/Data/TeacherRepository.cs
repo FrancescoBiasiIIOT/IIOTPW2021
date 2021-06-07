@@ -18,13 +18,31 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             _smartClassesContext = smartClassesContext;
         }
 
-        public IEnumerable<Teacher> GetTeachers()
+        public async Task<Subject> GetSubjectById(Guid id)
         {
-            var teachers = _smartClassesContext.Teachers
-                .Include(t => t.Subjects)
-                .ToList();
+            return await _smartClassesContext.
+            Subjects.Where(t => t.Id == id)
+            .FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<Teacher>> GetTeachers()
+        {
+            var teachers = await _smartClassesContext.Teachers
+                .Include(t => t.Teaches)
+                .ToListAsync();
 
             return teachers;
+        }
+
+        public async Task<Teacher> GetTeacherById(Guid id)
+        {
+            return await _smartClassesContext.
+                Teachers.Where(t => t.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Subject>> GetSubjects()
+        {
+            return await _smartClassesContext.Subjects.ToListAsync();
         }
     }
 }
