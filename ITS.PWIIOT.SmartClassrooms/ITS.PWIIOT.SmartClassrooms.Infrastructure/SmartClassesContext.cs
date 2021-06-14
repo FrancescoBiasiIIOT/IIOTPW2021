@@ -15,7 +15,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure
 
         }
         public DbSet<Building> Buildings { get; set; }
-        public DbSet<Classrooms> Classrooms { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Gateway> Gateways { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Microcontroller> Microcontrollers { get; set; }

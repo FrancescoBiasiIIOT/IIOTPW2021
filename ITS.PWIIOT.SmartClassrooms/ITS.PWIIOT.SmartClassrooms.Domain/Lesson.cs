@@ -15,7 +15,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public DateTime StartDate { get; set; }
         [Required]
         public TimeSpan Duration { get; set; }
-        public Classrooms Classroom { get; set; }
+        public Classroom Classroom { get; set; }
         public Guid ClassroomId { get; set; }
         public Teacher Teacher { get; set; }
         public Guid TeacherId { get; set; }

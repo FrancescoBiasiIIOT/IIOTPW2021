@@ -11,7 +11,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
 
     [Table("Classrooms")]
-    public class Classrooms : EntityBase<Guid>
+    public class Classroom : EntityBase<Guid>
     {
         [Required]
         [MinLength(1), MaxLength(10)]
@@ -30,6 +30,15 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
                 throw new Exception("Building required");
             }
             return Building.Id + Name;
+        }
+
+        public void SetAvailable()
+        {
+            if(State != ClassroomState.Occupata)
+            {
+                throw new Exception("impossibile cambiare lo stato della classe");
+            }
+            State = ClassroomState.Libero;
         }
 
     }

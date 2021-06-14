@@ -22,7 +22,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Shared.Admin
         [BindProperty]
         public Lesson Lesson { get; set; }
         public IEnumerable<Teacher> Teachers { get; set; }
-        public IEnumerable<Classrooms> Classrooms { get; set; }
+        public IEnumerable<Classroom> Classrooms { get; set; }
 
         public EventsModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository)
         {
@@ -32,7 +32,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Shared.Admin
             Lessons = new List<Lesson>();
             Teachers = new List<Teacher>();
             Subjects = new List<Subject>();
-            Classrooms = new List<Classrooms>();
+            Classrooms = new List<Classroom>();
             Lesson = new();
             this.classroomRepository = classroomRepository;
         }

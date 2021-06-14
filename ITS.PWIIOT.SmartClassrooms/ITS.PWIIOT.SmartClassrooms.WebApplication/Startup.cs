@@ -1,4 +1,5 @@
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
@@ -40,6 +41,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
+            services.AddScoped<IClassroomService, ClassroomService>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IIotHubService, IotHubService>();
             services.AddScoped<IMessage, ServiceBusService>();

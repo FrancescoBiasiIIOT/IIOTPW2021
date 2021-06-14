@@ -25,7 +25,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         [BindProperty]
         public Lesson Lesson { get; set; }
         public IEnumerable<Teacher> Teachers { get; set; }
-        public IEnumerable<Classrooms> Classrooms { get; set; }
+        public IEnumerable<Classroom> Classrooms { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository, ITeacherRepository teacherRepository, IClassroomRepository classroomRepository, IIotHubService iotHubService, ISubjectRepository subjectRepository)
         {
@@ -35,7 +35,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
             Lessons = new List<Lesson>();
             Teachers = new List<Teacher>();
             Subjects = new List<Subject>();
-            Classrooms = new List<Classrooms>();
+            Classrooms = new List<Classroom>();
             Lesson = new();
             this.classroomRepository = classroomRepository;
             this.iotHubService = iotHubService;

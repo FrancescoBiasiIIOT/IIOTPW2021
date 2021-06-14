@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Lesson services\" />
+  </ItemGroup>
+
 </Project>

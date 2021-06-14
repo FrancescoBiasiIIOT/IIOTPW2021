@@ -18,7 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             _context = context;
         }
 
-        public async Task<Classrooms> GetClassroomById(string id)
+        public async Task<Classroom> GetClassroomById(string id)
         {
             return await _context.Classrooms
                 .Include(c => c.Building)
@@ -26,11 +26,17 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Classrooms>> GetClassrooms()
+        public async Task<IEnumerable<Classroom>> GetClassrooms()
         {
             return await _context.Classrooms
                 .Include(c => c.Building)
                 .ToListAsync();
+        }
+
+        public async Task UpdateClassroom(Classroom classroom)
+        {
+            _context.Entry(classroom).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }
