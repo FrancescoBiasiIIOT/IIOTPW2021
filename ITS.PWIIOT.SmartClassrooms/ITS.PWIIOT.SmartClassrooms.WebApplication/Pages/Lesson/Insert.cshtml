@@ -16,7 +16,7 @@
             </label>
             <input asp-for="Lesson.Duration" type="time" class="form-control" />
         </div>
-        <select asp-for="Lesson.Teacher.Id" class="custom-select custom-select-lg mb-3">
+        <select asp-for="Lesson.TeacherId" class="custom-select custom-select-lg mb-3">
             <option selected>Professore</option>
             @foreach (var professore in Model.Teachers)
             {
