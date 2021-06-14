@@ -11,6 +11,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
     public class ReceiverWorker : BackgroundService
     {
         //Worker per ricevere i messaggi dal dispositivo 
+        /*
         private readonly IMessage _message;
         private readonly IClassroomService _classroomService;
         public ReceiverWorker(IMessage message, IClassroomService classroomService)
@@ -27,6 +28,15 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
                 _classroomService.SetClassroomAvailable("");
               //NOTIFICARE A TUTTI I CLIENT CHE L'AULA è LIBERA
           }, "ITS/classroom/available");
+        }
+        */
+        public ReceiverWorker()
+        {
+
+        }
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+
         }
     }
 }

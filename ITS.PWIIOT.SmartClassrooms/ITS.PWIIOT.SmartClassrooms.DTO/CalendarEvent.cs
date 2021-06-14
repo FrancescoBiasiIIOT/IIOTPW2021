@@ -8,11 +8,15 @@ namespace ITS.PWIIOT.SmartClassrooms.DTO
 {
     public class CalendarEvent
     {
-        public string TeacherName { get; set; }
-        public string ClassRoomId { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string Id { get; set; }
+
+        public string Title { get; set; }
+
+        public bool AllDay { get; set; }
+
+        public DateTime Start { get; set; }
+
+        public DateTime? End { get; set; }
 
         public CalendarEvent()
         {

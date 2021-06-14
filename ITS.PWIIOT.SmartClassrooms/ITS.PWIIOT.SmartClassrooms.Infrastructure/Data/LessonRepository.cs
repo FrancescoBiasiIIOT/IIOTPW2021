@@ -44,13 +44,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public async Task<IEnumerable<Lesson>> GetLessonsByClassroom(DateTime start, DateTime? end, string classroomId)
         {
             var lessons = await _smartClassesContext.Lessons
-                .Include(l => l.Classroom)
-                    .ThenInclude(c => c.Building)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
-                .Where(l => l.StartDate >= start && l.GetEndDate() <= end
-                && l.Classroom.GetClassroomId() == classroomId)
+                .Include(l => l.Classroom)
+                    .ThenInclude(c => c.Building)
                 .ToListAsync();
+
+            lessons = lessons.Where(l => l.Classroom.GetClassroomId() == classroomId).ToList();
 
             return lessons;
         }

@@ -24,7 +24,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 
         public string GetClassroomId()
         {
-            return Building?.Building_Name + Name;
+            return Building?.Name + Name;
         }
 
         public void SetAvailable()

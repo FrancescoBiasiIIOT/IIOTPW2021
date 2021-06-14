@@ -35,6 +35,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllers();
             services.AddHostedService<ReceiverWorker>();
             services.AddHostedService<SchedulerWorker>();
             services.AddScoped<IBuildingRepository, BuildingRepository>();

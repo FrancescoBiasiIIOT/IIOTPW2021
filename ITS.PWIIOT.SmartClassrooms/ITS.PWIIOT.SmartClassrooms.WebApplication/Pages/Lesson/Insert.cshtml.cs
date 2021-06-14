@@ -18,7 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Lesson
         public InsertModel(IClassroomRepository classroomRepository, ISubjectRepository subjectRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository)
         {
             Teachers = new List<Teacher>();
-            Classrooms = new List<Classroom>();
+            Classrooms = new List<Domain.Classroom>();
             Subjects = new List<Subject>();
             _classroomRepository = classroomRepository;
             _subjectRepository = subjectRepository;
@@ -30,7 +30,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Lesson
         [BindProperty]
         public Domain.Lesson Lesson { get; set; }
         public IEnumerable<Teacher> Teachers { get; set; }
-        public IEnumerable<Classroom> Classrooms { get; set; }
+        public IEnumerable<Domain.Classroom> Classrooms { get; set; }
         public async Task OnGet()
         {
             Lesson = new Domain.Lesson();

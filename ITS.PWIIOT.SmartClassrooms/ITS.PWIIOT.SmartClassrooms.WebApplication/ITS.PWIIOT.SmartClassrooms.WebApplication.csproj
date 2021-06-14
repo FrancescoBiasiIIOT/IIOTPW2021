@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Pages\Classroom\Detail\" />
+    <Folder Include="Pages\Classrooms\Detail\" />
   </ItemGroup>
 
 </Project>
