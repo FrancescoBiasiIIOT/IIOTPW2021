@@ -45,7 +45,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Lesson
             Lesson.Teacher = await _teacherRepository.GetTeacherById(Lesson.TeacherId);
             Lesson.Subject = await _subjectRepository.GetSubjectById(Lesson.SubjectId);
             await _lessonRepository.InsertLesson(Lesson);
-            RedirectToPage("./Index");
+            RedirectToPage("/Index");
         }
     }
 }

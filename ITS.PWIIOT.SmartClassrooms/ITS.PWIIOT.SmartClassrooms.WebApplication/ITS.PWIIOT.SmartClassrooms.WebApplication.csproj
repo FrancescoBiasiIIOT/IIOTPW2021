@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Pages\Classrooms\Detail\" />
+    <Folder Include="Pages\Classroom\Detail\" />
   </ItemGroup>
 
 </Project>
