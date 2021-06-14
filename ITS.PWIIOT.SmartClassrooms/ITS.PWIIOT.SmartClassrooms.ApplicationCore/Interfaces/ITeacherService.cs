@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
 {
-    public interface ISubjectService
+    public interface ITeacherService
     {
-        Task<IEnumerable<SubjectInfo>> GetSubjects();
+        Task<IEnumerable<TeacherInfo>> GetTeachers();
     }
 }

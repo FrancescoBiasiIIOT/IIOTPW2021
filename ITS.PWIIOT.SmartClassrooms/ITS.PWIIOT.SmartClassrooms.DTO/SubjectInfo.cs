@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.DTO
 {
-    public class ClassroomInfo
+    public class SubjectInfo
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

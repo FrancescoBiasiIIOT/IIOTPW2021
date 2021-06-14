@@ -20,5 +20,9 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         [Required]
         public DateTime Date { get; set; }
         public IEnumerable<Teaches> Teaches { get; set; }
+        public string GetFullName()
+        {
+            return $"{Name} {Surname}"; 
+        }
     }
 }

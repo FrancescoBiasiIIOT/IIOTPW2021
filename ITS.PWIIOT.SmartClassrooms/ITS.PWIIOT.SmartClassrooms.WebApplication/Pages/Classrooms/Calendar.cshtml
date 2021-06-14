@@ -3,14 +3,74 @@
 @{
 }
 <head>
-    <link href="~/fontawesome/css/all.css"  rel='stylesheet'/>
-    <link href ="~/fullcalendar/main.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/all.css" rel='stylesheet' />
+    <link href="~/fullcalendar/main.css" rel="stylesheet" />
 </head>
 
 <input type="text" id="classroomId" value="@Model.Classroom.Name" hidden />
 <h1>AULA: @Model.Classroom.Name</h1>
 <div class="mt-3" id='calendar'></div>
 
+<!-- Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuova Lezione</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="classroom"  class="form-label">Aula</label>
+                            <input type="text"  asp-for="Lesson.ClassroomId" readonly class="form-control" id="classroom" value="@Model.Classroom.Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="startDate" class="form-label">Data inizio</label>
+                            <input type="datetime"  asp-for="Lesson.StartDate" readonly class="form-control" id="startDate">
+                        </div>
+                        <div class="col-6">
+                            <label for="endDate" class="form-label">Data fine</label>
+                            <input type="datetime" readonly  asp-for="Lesson.EndDate" class="form-control" id="endDate">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <select asp-for="Lesson.TeacherId" class="custom-select custom-select-lg mb-3">
+                                <option selected>Professore</option>
+                                @foreach (var professore in Model.Teachers)
+                                {
+                                    <option value=@professore.Id>@professore.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <select asp-for="Lesson.SubjectId" class="custom-select custom-select-lg mb-3">
+                                <option selected>Materia</option>
+                                @foreach (var materia in Model.Subjects)
+                                {
+                                    <option value=@materia.Id>@materia.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="~/fullcalendar/main.js"></script>
 <script src="~/fullcalendar/locales/it.js"></script>
 <script src="~/js/fullCalendar.js"></script>
