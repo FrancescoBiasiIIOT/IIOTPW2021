@@ -20,6 +20,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
 
         public IndexModel(ILogger<IndexModel> logger, ILessonRepository lessonRepository)
         {
+
             this.lessonRepository = lessonRepository;
         }
 

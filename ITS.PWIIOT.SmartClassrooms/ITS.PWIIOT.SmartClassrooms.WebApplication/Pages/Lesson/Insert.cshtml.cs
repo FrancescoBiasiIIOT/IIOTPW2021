@@ -39,13 +39,13 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Lesson
             Teachers = await _teacherRepository.GetTeachers();
         }
 
-        public async Task OnPost()
+        public async Task<IActionResult> OnPost()
         {
             Lesson.Classroom = await _classroomRepository.GetById(Lesson.ClassroomId);
             Lesson.Teacher = await _teacherRepository.GetTeacherById(Lesson.TeacherId);
             Lesson.Subject = await _subjectRepository.GetSubjectById(Lesson.SubjectId);
             await _lessonRepository.InsertLesson(Lesson);
-            RedirectToPage("/Index");
+            return RedirectToPage("/Index");
         }
     }
 }
