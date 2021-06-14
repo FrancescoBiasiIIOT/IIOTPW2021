@@ -9,10 +9,10 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
     public interface ILessonRepository
     {
-        public IEnumerable<Lesson> GetLessons(DateTime start, DateTime end);
-        public IEnumerable<Lesson> GetLessonsByClassroom(DateTime start, DateTime end, Guid classroomId);
-        public void InsertLesson(Lesson lesson);
-        public void UpdateLesson(Lesson lesson);
-        public void DeleteLesson(Guid id);
+        Task<IEnumerable<Lesson>> GetLessons(DateTime start, DateTime end);
+        Task<IEnumerable<Lesson>> GetLessonsByClassroom(DateTime start, DateTime? end, string classroomId);
+        Task InsertLesson(Lesson lesson);
+        Task UpdateLesson(Lesson lesson);
+        Task DeleteLesson(Guid id);
     }
 }

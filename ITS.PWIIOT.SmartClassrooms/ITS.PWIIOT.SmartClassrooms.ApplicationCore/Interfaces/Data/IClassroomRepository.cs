@@ -9,7 +9,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
     public interface IClassroomRepository
     {
-        Task<Classrooms> GetClassroomById(Guid id);
+        Task<Classrooms> GetClassroomById(string id);
         Task<IEnumerable<Classrooms>> GetClassrooms();
     }
 }

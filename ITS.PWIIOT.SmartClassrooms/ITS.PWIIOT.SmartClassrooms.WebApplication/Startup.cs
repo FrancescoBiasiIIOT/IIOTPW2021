@@ -1,3 +1,4 @@
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
@@ -41,6 +42,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IIotHubService, IotHubService>();
             services.AddScoped<IMessage, ServiceBusService>();
+            services.AddScoped<ICalendarService, CalendarService>();
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }
 

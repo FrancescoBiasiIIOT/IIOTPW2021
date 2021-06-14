@@ -45,21 +45,14 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         public async Task OnGet()
         {
             Lesson = new();
-            Lessons = lessonRepository.GetLessons(new DateTime(2021,05,05), new DateTime(2021,12,30));
+           // Lessons = lessonRepository.GetLessons(new DateTime(2021,05,05), new DateTime(2021,12,30));
             Teachers = await teacherRepository.GetTeachers();
             Subjects = await subjectRepository.GetSubjects();
             Classrooms = await classroomRepository.GetClassrooms();
         }
         public async Task<IActionResult> OnPost()
         {
-            var classroom = await classroomRepository.GetClassroomById(Lesson.ClassroomId); 
-            var teacher = await teacherRepository.GetTeacherById(Lesson.TeacherId);
-            var subject = await subjectRepository.GetSubjectById(Lesson.SubjectId);
-            Lesson.Subject = subject;
-            Lesson.Teacher = teacher;
-            Lesson.Classroom = classroom;
-            lessonRepository.InsertLesson(Lesson);
-        //    iotHubService.SendMessageToDevice(JsonSerializer.Serialize(Lesson),"RB100");
+      
             return Page();
         }
     }

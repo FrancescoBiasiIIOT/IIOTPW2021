@@ -23,6 +23,15 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public FloorState Floor { get; set; }
         public Building Building { get; set; }
 
+        public string GetClassroomId()
+        {
+            if(Building != null)
+            {
+                throw new Exception("Building required");
+            }
+            return Building.Id + Name;
+        }
+
     }
     public enum FloorState
     {

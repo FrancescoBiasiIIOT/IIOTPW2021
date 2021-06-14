@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj" />
+    <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj" />
   </ItemGroup>
 
 </Project>
