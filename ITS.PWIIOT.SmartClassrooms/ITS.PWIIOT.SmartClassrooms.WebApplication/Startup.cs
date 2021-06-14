@@ -1,6 +1,7 @@
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure.Data;
 using ITS.PWIIOT.SmartClassrooms.WebApplication.Services;
@@ -39,6 +40,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IIotHubService, IotHubService>();
+            services.AddScoped<IMessage, ServiceBusService>();
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }
 
