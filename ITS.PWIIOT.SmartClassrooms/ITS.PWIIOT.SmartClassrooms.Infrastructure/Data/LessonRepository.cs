@@ -51,6 +51,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                 .ToListAsync();
 
             lessons = lessons.Where(l => l.Classroom.GetClassroomId() == classroomId).ToList();
+            lessons = lessons.Where(l => l.StartDate >= start && l.GetEndDate() <= end).ToList();
 
             return lessons;
         }

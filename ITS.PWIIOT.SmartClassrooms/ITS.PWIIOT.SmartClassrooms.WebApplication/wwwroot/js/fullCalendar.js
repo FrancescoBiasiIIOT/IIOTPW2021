@@ -1,3 +1,5 @@
+var classroomId = document.getElementById("classroomId");
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             url: 'https://localhost:44310/Calendar',
             method: 'GET',
             extraParams: {
-
+                classroomId: classroomId.value
             },
             failure: function () {
                 alert('there was an error while fetching events!');
@@ -27,6 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         hiddenDays: [0, 6]
     });
-    console.log(calendar.events)
+
     calendar.render();
 });

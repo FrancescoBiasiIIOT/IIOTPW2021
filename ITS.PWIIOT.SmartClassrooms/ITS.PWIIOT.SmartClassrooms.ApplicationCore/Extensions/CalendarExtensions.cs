@@ -19,7 +19,13 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         {
             return new CalendarEvent
             {
-
+                Id = new Guid().ToString(),
+                Start = lesson.StartDate,
+                End = lesson.GetEndDate(),
+                AllDay = false,
+                Title = $"Aula: {lesson.Subject.Name} \n " +
+                $"{lesson.Teacher.Name} {lesson.Teacher.Surname}" +
+                $" \n {lesson.Subject.Name}"
             };
         }
 

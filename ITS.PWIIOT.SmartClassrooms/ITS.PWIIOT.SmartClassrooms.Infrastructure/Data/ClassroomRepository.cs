@@ -28,10 +28,10 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
 
         public async Task<Classroom> GetClassroomById(string id)
         {
-            return await _context.Classrooms
+            var classrooms =  await _context.Classrooms
                 .Include(c => c.Building)
-                .Where(c => c.GetClassroomId() == id)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
+            return classrooms.FirstOrDefault(c => c.GetClassroomId() == id);
         }
 
         public async Task<IEnumerable<Classroom>> GetClassrooms()

@@ -1,5 +1,7 @@
-﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
+using ITS.PWIIOT.SmartClassrooms.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,12 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services
         public ClassroomService(IClassroomRepository classroomRepository)
         {
             _classroomRepository = classroomRepository;
+        }
+
+        public async Task<ClassroomInfo> GetClassroomById(string classroomId)
+        {
+            var classroom = await _classroomRepository.GetClassroomById(classroomId);
+            return classroom.ToClassroomInfo();
         }
 
         public async Task SetClassroomAvailable(string classroomId)

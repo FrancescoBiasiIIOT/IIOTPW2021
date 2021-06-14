@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{classroomId}"
 @model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classroom.CalendarModel
 @{
 }
@@ -6,7 +6,11 @@
     <link href="~/fontawesome/css/all.css"  rel='stylesheet'/>
     <link href ="~/fullcalendar/main.css" rel="stylesheet" />
 </head>
-<div id='calendar'></div>
+
+<input type="text" id="classroomId" value="@Model.Classroom.Name" hidden />
+<h1>AULA: @Model.Classroom.Name</h1>
+<div class="mt-3" id='calendar'></div>
+
 <script src="~/fullcalendar/main.js"></script>
 <script src="~/fullcalendar/locales/it.js"></script>
 <script src="~/js/fullCalendar.js"></script>

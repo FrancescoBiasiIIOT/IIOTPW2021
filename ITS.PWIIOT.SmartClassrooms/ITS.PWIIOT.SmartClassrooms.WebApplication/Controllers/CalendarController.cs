@@ -1,4 +1,5 @@
-﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
+﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,22 +21,10 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(DateTime start, DateTime end)
+        public async Task<IActionResult> Get(DateTime start, DateTime? end, string classroomId)
         {
-            var events = new List<CalendarEvent>();
-            var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, "S2");
-            foreach (var item in lessons)
-            {
-                events.Add(new CalendarEvent
-                {
-                    Id = item.Id.ToString(),
-                    Title = item.Subject.Name,
-                    AllDay = false,
-                    Start = item.StartDate,
-                    End = item.GetEndDate()
-                });
-            }
-
+            var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, classroomId);
+            var events = CalendarExtensions.ToCalendarEvents(lessons);
             return Ok(events);
         }
 
