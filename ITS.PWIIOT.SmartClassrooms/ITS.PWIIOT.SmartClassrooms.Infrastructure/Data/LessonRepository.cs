@@ -25,13 +25,14 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                 Id = id
             };
             _smartClassesContext.Entry(product).State = EntityState.Deleted;
-           await  _smartClassesContext.SaveChangesAsync();
+            await _smartClassesContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Lesson>> GetLessons(DateTime start, DateTime end)
         {
             var lessons = await _smartClassesContext.Lessons
                 .Include(l => l.Classroom)
+                    .ThenInclude(c => c.Building)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
                 .Where(l => l.StartDate >= start)
@@ -47,7 +48,8 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                     .ThenInclude(c => c.Building)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
-                .Where(l => l.StartDate >= start && l.Classroom.GetClassroomId() == classroomId)
+                .Where(l => l.StartDate >= start && l.GetEndDate() <= end
+                && l.Classroom.GetClassroomId() == classroomId)
                 .ToListAsync();
 
             return lessons;

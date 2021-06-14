@@ -1,8 +1,9 @@
 ﻿@page
-@model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Shared.Admin.EventsModel
+@model InsertModel
 @{
-
+    ViewData["Title"] = "Home page";
 }
+
 <form method="post">
     <div class="row">
         <div class="form-group">
@@ -33,7 +34,7 @@
             <option selected>Classe</option>
             @foreach (var classe in Model.Classrooms)
             {
-                <option value=@classe.Id>@classe.Name</option>
+                <option value=@classe.Id>@classe.GetClassroomId()</option>
             }
         </select>
     </div>
@@ -41,25 +42,3 @@
         <button type="submit" class="btn btn-dark">Salva</button>
     </div>
 </form>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Orario</th>
-            <th scope="col">Materia</th>
-            <th scope="col">Insegnante</th>
-            <th scope="col">Aula</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var lezione in Model.Lessons)
-        {
-            <tr>
-                <th scope="row">@lezione.Id</th>
-                <td>@lezione.Subject.Name</td>
-                <td>@lezione.Teacher.Name @lezione.Teacher.Surname</td>
-                <td>@lezione.Classroom.Name @lezione.Classroom.Name</td>
-            </tr>
-        }
-    </tbody>
-</table>

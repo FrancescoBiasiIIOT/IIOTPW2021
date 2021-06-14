@@ -23,9 +23,9 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public Guid SubjectId { get; set; }
 
 
-        public DateTime GetEndDate(TimeSpan end)
+        public DateTime GetEndDate()
         {
-            return StartDate + end;
+            return StartDate.Add(Duration);
         }
     }
 

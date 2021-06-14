@@ -29,7 +29,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
         public async Task<IEnumerable<CalendarEvent>> GetEventBy(DateTime start, DateTime? end, string classRoomId)
         {
             //AGGIUNGERE LOGICA DI MODIFICA
-
             var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, classRoomId);
             var events = CalendarExtensions.ToCalendarEvents(lessons);
             return events;

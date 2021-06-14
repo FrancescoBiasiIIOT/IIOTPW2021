@@ -20,16 +20,11 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         [Required]
         public ClassroomState State { get; set; }
         public int Capacity { get; set; }
-        public FloorState Floor { get; set; }
         public Building Building { get; set; }
 
         public string GetClassroomId()
         {
-            if(Building != null)
-            {
-                throw new Exception("Building required");
-            }
-            return Building.Id + Name;
+            return Building?.Building_Name + Name;
         }
 
         public void SetAvailable()

@@ -21,6 +21,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public IEnumerable<Building> GetBuildings()
         {
             var buildings = _smartClassesContext.Buildings
+                .Include(b => b.Classrooms)
                 .ToList();
 
             return buildings;

@@ -17,10 +17,10 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Shared.Admin
         private readonly ITeacherRepository teacherRepository;
         private readonly IClassroomRepository classroomRepository;
         private readonly ILogger<IndexModel> _logger;
-        public IEnumerable<Lesson> Lessons { get; set; }
+        public IEnumerable<Domain.Lesson> Lessons { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
         [BindProperty]
-        public Lesson Lesson { get; set; }
+        public Domain.Lesson Lesson { get; set; }
         public IEnumerable<Teacher> Teachers { get; set; }
         public IEnumerable<Classroom> Classrooms { get; set; }
 
@@ -29,7 +29,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Shared.Admin
             _logger = logger;
             this.lessonRepository = lessonRepository;
             this.teacherRepository = teacherRepository;
-            Lessons = new List<Lesson>();
+         //   Lessons = new List<Lesson>();
             Teachers = new List<Teacher>();
             Subjects = new List<Subject>();
             Classrooms = new List<Classroom>();

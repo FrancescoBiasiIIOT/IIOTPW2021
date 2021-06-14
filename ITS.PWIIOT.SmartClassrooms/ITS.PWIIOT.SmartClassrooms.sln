@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.Infrastructure", "ITS.PWIIOT.SmartClassrooms.Infrastructure\ITS.PWIIOT.SmartClassrooms.Infrastructure.csproj", "{8AE8BE78-898C-448A-B5B6-677A4C04738B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITS.PWIIOT.SmartClassrooms.TestWorker", "ITS.PWIIOT.SmartClassrooms.TestWorker\ITS.PWIIOT.SmartClassrooms.TestWorker.csproj", "{2FCD4E6F-D030-473C-858A-B15E1A159C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.TestWorker", "ITS.PWIIOT.SmartClassrooms.TestWorker\ITS.PWIIOT.SmartClassrooms.TestWorker.csproj", "{2FCD4E6F-D030-473C-858A-B15E1A159C9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
