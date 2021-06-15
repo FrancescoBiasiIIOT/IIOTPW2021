@@ -21,11 +21,13 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             {
                 Id = new Guid().ToString(),
                 Start = lesson.StartDate,
-                End = lesson.GetEndDate(),
+                End = lesson.EndDate,
                 AllDay = false,
-                Title = $"Aula: {lesson.Subject.Name} \n " +
+                Title = $"Aula: {lesson.Classroom.Name} \n " +
                 $"{lesson.Teacher.Name} {lesson.Teacher.Surname}" +
-                $" \n {lesson.Subject.Name}"
+                $" \n {lesson.Subject.Name}" + 
+                $"\n Corso {lesson.Course.Name}"
+
             };
         }
 

@@ -15,11 +15,13 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classroom
         private readonly ISubjectService _subjectService;
         private readonly ITeacherService _teacherService;
         private readonly ILessonService _lessonService;
+        private readonly ICourseService _courseService;
         public IEnumerable<TeacherInfo> Teachers { get; set; }
+        public IEnumerable<CourseInfo> Courses { get; set; }
         public IEnumerable<SubjectInfo> Subjects { get; set; }
         [BindProperty]
         public LessonInfo Lesson { get; set; }
-        public CalendarModel(IClassroomService classroomService, ITeacherService teacherService, ISubjectService subjectService, ILessonService lessonService)
+        public CalendarModel(IClassroomService classroomService, ITeacherService teacherService, ISubjectService subjectService, ILessonService lessonService, ICourseService courseService)
         {
             Lesson = new();
             Classroom = new();
@@ -27,6 +29,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classroom
             _teacherService = teacherService;
             _subjectService = subjectService;
             _lessonService = lessonService;
+            _courseService = courseService;
         }
 
         public ClassroomInfo Classroom { get; set; }
@@ -36,6 +39,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classroom
             Classroom = new();
             Teachers = await _teacherService.GetTeachers();
             Subjects = await _subjectService.GetSubjects();
+            Courses = await _courseService.GetCourses();
             Classroom = await _classroomService.GetClassroomById(classroomId);
         }
         public async Task<IActionResult> OnPost(string classroomId)

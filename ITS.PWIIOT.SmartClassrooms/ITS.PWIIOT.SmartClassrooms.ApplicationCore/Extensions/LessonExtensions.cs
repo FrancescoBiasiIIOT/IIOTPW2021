@@ -15,7 +15,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             return new Lesson
             {
                 StartDate = lesson.StartDate,
-                Duration = lesson.GetDuration(),
+                EndDate = (DateTime)lesson.EndDate,
             };
         }
     }

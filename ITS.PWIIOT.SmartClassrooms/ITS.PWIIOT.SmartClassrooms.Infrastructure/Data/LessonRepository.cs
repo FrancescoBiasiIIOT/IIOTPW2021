@@ -35,6 +35,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
                     .ThenInclude(c => c.Building)
                 .Include(l => l.Teacher)
                 .Include(l => l.Subject)
+                .Include(l => l.Course)
                 .Where(l => l.StartDate >= start)
                 .ToListAsync();
 
@@ -45,13 +46,30 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         {
             var lessons = await _smartClassesContext.Lessons
                 .Include(l => l.Teacher)
+                .Include(l => l.Course)
                 .Include(l => l.Subject)
                 .Include(l => l.Classroom)
                     .ThenInclude(c => c.Building)
                 .ToListAsync();
 
             lessons = lessons.Where(l => l.Classroom.GetClassroomId() == classroomId).ToList();
-            lessons = lessons.Where(l => l.StartDate >= start && l.GetEndDate() <= end).ToList();
+            lessons = lessons.Where(l => l.StartDate >= start && l.EndDate <= end).ToList();
+
+            return lessons;
+        }
+
+        public async Task<IEnumerable<Lesson>> GetLessonsByCourse(DateTime start, DateTime? end, Guid courseId)
+        {
+            var lessons = await _smartClassesContext.Lessons
+    .Include(l => l.Teacher)
+    .Include(l => l.Course)
+    .Include(l => l.Subject)
+    .Include(l => l.Classroom)
+        .ThenInclude(c => c.Building)
+    .ToListAsync();
+
+            lessons = lessons.Where(l => l.Course.Id == courseId).ToList();
+            lessons = lessons.Where(l => l.StartDate >= start && l.EndDate <= end).ToList();
 
             return lessons;
         }

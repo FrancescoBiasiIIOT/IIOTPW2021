@@ -21,9 +21,17 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(DateTime start, DateTime? end, string classroomId)
+        public async Task<IActionResult> GetByClassroom(DateTime start, DateTime? end, string classroomId)
         {
             var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, classroomId);
+            var events = CalendarExtensions.ToCalendarEvents(lessons);
+            return Ok(events);
+        }
+        [Route("course")]
+        [HttpGet]
+        public async Task<IActionResult> GetByCourse(DateTime start, DateTime? end, string courseId)
+        {
+            var lessons = await _lessonRepository.GetLessonsByCourse(start, end, new Guid(courseId));
             var events = CalendarExtensions.ToCalendarEvents(lessons);
             return Ok(events);
         }

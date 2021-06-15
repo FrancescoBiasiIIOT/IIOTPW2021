@@ -3,32 +3,18 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<a asp-page="/lesson/insert">Inserisci</a>
-<a asp-page="/classrooms/calendar" asp-route-classroomId ="S2">Calendario</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Materia</th>
-            <th scope="col">Insegnante</th>
-            <th scope="col">Aula</th>
-            <th scope="col">Inizio</th>
-            <th scope="col">Fine</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var lezione in Model.Lessons)
-        {
-        <tr>
-            <th scope="row">@lezione.Id</th>
-            <td>@lezione.Subject.Name</td>
-            <td>@lezione.Teacher.Name @lezione.Teacher.Surname</td>
-            <td>@lezione.Classroom.GetClassroomId()</td>
-            <td>@lezione.StartDate </td>
-            <td>@lezione.GetEndDate() </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<h1>AULE</h1>
+@foreach (var item in Model.Classrooms)
+{
+    <a class="btn btn-primary" asp-page="/classrooms/calendar" asp-route-classroomId=@item.GetClassroomId()>@item.GetClassroomId()</a>
+}
+<hr>
+
+<h1>CORSI</h1>
+@foreach (var item in Model.Courses)
+{
+    <a class="btn btn-primary" asp-page="/course/calendar" asp-route-courseId=@item.Id>@item.Name</a>
+}
+<hr />
 
 

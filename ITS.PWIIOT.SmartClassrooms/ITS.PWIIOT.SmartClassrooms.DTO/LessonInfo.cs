@@ -15,6 +15,7 @@ namespace ITS.PWIIOT.SmartClassrooms.DTO
         public DateTime? EndDate { get; set; }
         public string ClassroomId { get; set; }
         public Guid TeacherId { get; set; }
+        public Guid CourseId { get; set; }
         public Guid SubjectId { get; set; }
 
         public TimeSpan GetDuration()

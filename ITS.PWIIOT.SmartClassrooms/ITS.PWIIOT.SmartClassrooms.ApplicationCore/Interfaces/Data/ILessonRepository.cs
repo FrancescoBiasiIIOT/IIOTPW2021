@@ -11,6 +11,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
     {
         Task<IEnumerable<Lesson>> GetLessons(DateTime start, DateTime end);
         Task<IEnumerable<Lesson>> GetLessonsByClassroom(DateTime start, DateTime? end, string classroomId);
+        Task<IEnumerable<Lesson>> GetLessonsByCourse(DateTime start, DateTime? end, Guid courseId);
         Task InsertLesson(Lesson lesson);
         Task UpdateLesson(Lesson lesson);
         Task DeleteLesson(Guid id);
