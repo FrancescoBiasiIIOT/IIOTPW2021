@@ -2,10 +2,8 @@
 @model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Course.CalendarModel
 @{
 }
-<head>
-    <link href="~/fontawesome/css/all.css" rel='stylesheet' />
-    <link href="~/fullcalendar/main.css" rel="stylesheet" />
-</head>
+
+
 
 <input type="text" id="courseId" value="@Model.Course.Id" hidden />
 <h1>CORSO: @Model.Course.Name</h1>
@@ -14,7 +12,4 @@
 
 
 
-<script src="~/fullcalendar/main.js"></script>
-<script src="~/fullcalendar/locales/it.js"></script>
-<script type="module" src="~/js/fullCalendar.js"></script>
 <script src="~/js/courseCalendar.js"></script>

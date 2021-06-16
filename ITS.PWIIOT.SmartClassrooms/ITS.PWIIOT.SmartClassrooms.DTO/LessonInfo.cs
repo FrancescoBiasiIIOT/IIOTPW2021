@@ -13,15 +13,29 @@ namespace ITS.PWIIOT.SmartClassrooms.DTO
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime? EndDate { get; set; }
+        [Required]
         public string ClassroomId { get; set; }
+        [Required]
         public Guid TeacherId { get; set; }
+        [Required]
         public Guid CourseId { get; set; }
+        [Required]
         public Guid SubjectId { get; set; }
 
         public TimeSpan GetDuration()
         {
             return EndDate.Value.Subtract(StartDate);
 
+        }
+
+        public bool IsLessonValid()
+        {
+            bool isValid = true;
+            if (ClassroomId == "" || TeacherId == Guid.Empty || CourseId == Guid.Empty || SubjectId == Guid.Empty)
+            {
+                isValid = !isValid;
+            }
+            return isValid;
         }
     }
 }

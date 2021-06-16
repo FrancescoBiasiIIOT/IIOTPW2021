@@ -1,6 +1,6 @@
 INSERT INTO [dbo].[Buildings]
            ([Id]
-           ,[Building_Name]
+           ,[Name]
            ,[Description])
      VALUES
            ('94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7'
@@ -10,7 +10,7 @@ GO
 
 INSERT INTO [dbo].[Buildings]
            ([Id]
-           ,[Building_Name]
+           ,[Name]
            ,[Description])
      VALUES
            ('b01dc575-af11-4ebb-955e-f1ae227eee8f'
@@ -18,91 +18,6 @@ INSERT INTO [dbo].[Buildings]
            ,'Edificio L')
 GO
 
-
-/*EDIFICO S */
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('2507a129-9380-419b-bb43-580154fe400f'
-           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7'
-           ,0)
-GO
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('075030e7-b3e4-4a79-8550-06eb4a373889'
-           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7'
-           ,1)
-GO
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('5fd12cf3-71cf-4313-90a7-07482c980c79'
-           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7'
-           ,2)
-GO
-
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('4a59854f-63b9-4f14-b2bf-a27b084f8d92'
-           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7'
-           ,3)
-GO
-
-
-/*EDIFICO L */
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('e5314e84-579d-408a-b311-caf3ba85e7dc'
-           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f'
-           ,0)
-GO
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('753768a2-f04b-4e02-b22c-e35775f42004'
-           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f'
-           ,1)
-GO
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('7a08c9a0-4f53-4f32-a6ac-bddb037b3a6f'
-           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f'
-           ,2)
-GO
-
-
-INSERT INTO [dbo].[FloorsBuilding]
-           ([Id]
-           ,[BuildingId]
-           ,[Floor])
-     VALUES
-           ('d97fce59-570b-496c-9bb7-18965f251ebb'
-           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f'
-           ,3)
-GO
 
 
 INSERT INTO [dbo].[Teachers]
@@ -161,13 +76,15 @@ INSERT INTO [dbo].[Classrooms]
            ,[Name]
            ,[State]
            ,[Capacity]
-           ,[FloorId])
+           ,[Floor]
+           ,[BuildingId])
      VALUES
            ('3e7f0daa-1e21-45c5-88d5-17e4bb59e481'
            ,'1'
            ,0
            ,30
-           ,'2507a129-9380-419b-bb43-580154fe400f')
+           ,1
+           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7')
 GO
 
 INSERT INTO [dbo].[Classrooms]
@@ -175,13 +92,15 @@ INSERT INTO [dbo].[Classrooms]
            ,[Name]
            ,[State]
            ,[Capacity]
-           ,[FloorId])
+           ,[Floor]
+           ,[BuildingId])
      VALUES
            ('8b1b33dc-60b6-4480-a113-81fd30479e60'
            ,'2'
            ,0
            ,30
-           ,'2507a129-9380-419b-bb43-580154fe400f')
+           ,1
+           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7')
 GO
 
 INSERT INTO [dbo].[Classrooms]
@@ -189,13 +108,15 @@ INSERT INTO [dbo].[Classrooms]
            ,[Name]
            ,[State]
            ,[Capacity]
-           ,[FloorId])
+           ,[Floor]
+           ,[BuildingId])
      VALUES
            ('303fb111-8fc1-4e40-a040-3a43a09a7326'
            ,'3'
            ,0
            ,30
-           ,'2507a129-9380-419b-bb43-580154fe400f')
+           ,1
+           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7')
 GO
 
 
@@ -204,13 +125,33 @@ INSERT INTO [dbo].[Classrooms]
            ,[Name]
            ,[State]
            ,[Capacity]
-           ,[FloorId])
+           ,[Floor]
+           ,[BuildingId])
      VALUES
            ('3b8d13a7-4bdf-4c58-9a6f-fbcd1ab7edef'
+           ,'4'
+           ,0
+           ,30
+           ,1
+           ,'94e51edf-22ca-4d26-b5f7-9b9b9bcd6bc7')
+GO
+
+
+
+INSERT INTO [dbo].[Classrooms]
+           ([Id]
+           ,[Name]
+           ,[State]
+           ,[Capacity]
+           ,[Floor]
+           ,[BuildingId])
+     VALUES
+           ('ca14f180-881b-43f6-8cbe-80b4f8f61aac'
            ,'1'
            ,0
            ,30
-           ,'e5314e84-579d-408a-b311-caf3ba85e7dc')
+           ,2
+           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f')
 GO
 
 
@@ -220,29 +161,15 @@ INSERT INTO [dbo].[Classrooms]
            ,[Name]
            ,[State]
            ,[Capacity]
-           ,[FloorId])
+           ,[Floor]
+           ,[BuildingId])
      VALUES
-           ('ca14f180-881b-43f6-8cbe-80b4f8f61aac'
+           ('797842b3-6280-4efa-b04d-11075cb75a2b'
            ,'2'
            ,0
            ,30
-           ,'e5314e84-579d-408a-b311-caf3ba85e7dc')
-GO
-
-
-
-INSERT INTO [dbo].[Classrooms]
-           ([Id]
-           ,[Name]
-           ,[State]
-           ,[Capacity]
-           ,[FloorId])
-     VALUES
-           ('797842b3-6280-4efa-b04d-11075cb75a2b'
-           ,'3'
-           ,0
-           ,30
-           ,'e5314e84-579d-408a-b311-caf3ba85e7dc')
+           ,1
+           ,'b01dc575-af11-4ebb-955e-f1ae227eee8f')
 GO
 
 

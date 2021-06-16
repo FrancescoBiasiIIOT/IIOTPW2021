@@ -19,7 +19,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         {
             return new CalendarEvent
             {
-                Id = new Guid().ToString(),
+                Id = lesson.Id.ToString(),
                 Start = lesson.StartDate,
                 End = lesson.EndDate,
                 AllDay = false,

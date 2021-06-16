@@ -23,6 +23,12 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public Guid SubjectId { get; set; }
         public Course Course { get; set; }
         public Guid CourseId { get; set; }
+
+
+        public TimeSpan GetDuration()
+        {
+            return EndDate.Subtract(StartDate);
+        }
     }
 
     

@@ -20,12 +20,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
 
         public async Task<Microcontroller> GetDeviceByClassroomId(string id)
         {
-            var classroom = await _smartClassesContext.Microcontrollers
+            var classrooms = await _smartClassesContext.Microcontrollers
                 .Include(m => m.Classroom)
                     .ThenInclude(c => c.Building)
                 .Include(m => m.Gateway)
-                .Where(c => c.Classroom.GetClassroomId() == id)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
+            var classroom = classrooms.Where(c => c.Classroom.GetClassroomId() == id)
+                .FirstOrDefault();
 
             return classroom;
 

@@ -2,7 +2,7 @@
 CREATE TABLE [dbo].[Buildings]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Building_Name] NVARCHAR(10) NOT NULL, 
+    [Name] NVARCHAR(10) NOT NULL, 
     [Description] NVARCHAR(150) NULL
 )
 
@@ -21,8 +21,9 @@ CREATE TABLE [dbo].[Classrooms]
     [Name] NVARCHAR(10) NOT NULL, 
     [State] INT NOT NULL, 
     [Capacity] INT NULL, 
-    [FloorId] UNIQUEIDENTIFIER NOT NULL, 
-    CONSTRAINT [FK_Classrooms_ToFloorsBuilding] FOREIGN KEY ([FloorId]) REFERENCES [FloorsBuilding]([Id])
+    [Floor] INT NOT NULL,
+    [BuildingId] UNIQUEIDENTIFIER NOT NULL, 
+    CONSTRAINT [FK_Classrooms_Buildings] FOREIGN KEY ([BuildingId]) REFERENCES [Buildings]([Id])
 )
 
 /* Gateways */
@@ -32,8 +33,9 @@ CREATE TABLE [dbo].[Gateways]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [GatewayId] VARCHAR(10) UNIQUE NOT NULL, 
-    [FloorId] UNIQUEIDENTIFIER NOT NULL, 
-    CONSTRAINT [FK_Gateways_ToFloorBuildings] FOREIGN KEY ([FloorId]) REFERENCES [FloorsBuilding]([Id])
+    [BuildingId] UNIQUEIDENTIFIER NOT NULL, 
+    [Floor] INT NOT NULL,
+    CONSTRAINT [FK_Gateways_Buildings] FOREIGN KEY ([BuildingId]) REFERENCES [Buildings]([Id])
 )
 
 /* Microcontrollers */
@@ -86,11 +88,13 @@ CREATE TABLE [dbo].[Lessons]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [StartDate] DATETIME NOT NULL, 
-    [Duration] TIME NOT NULL, 
+    [EndDate] DATETIME NOT NULL, 
     [ClassroomId] UNIQUEIDENTIFIER NOT NULL, 
+    [CourseId] UNIQUEIDENTIFIER NOT NULL, 
     [TeacherId] UNIQUEIDENTIFIER NOT NULL, 
     [SubjectId] UNIQUEIDENTIFIER NOT NULL, 
     CONSTRAINT [FK_Lessons_ToTeacher] FOREIGN KEY ([TeacherId]) REFERENCES [Teachers]([Id]),
     CONSTRAINT [FK_Lessons_ToSubject] FOREIGN KEY ([SubjectId]) REFERENCES [Subjects]([Id]),
     CONSTRAINT [FK_Lessons_ToClassroom] FOREIGN KEY ([ClassroomId]) REFERENCES [Classrooms]([Id]),
+    CONSTRAINT [FK_Lessons_ToCourse] FOREIGN KEY ([CourseId]) REFERENCES [dbo].[Courses] ([Id])
 )

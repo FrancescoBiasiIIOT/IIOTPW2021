@@ -36,5 +36,12 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
             return Ok(events);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string lessonId)
+        {
+            await _lessonRepository.DeleteLesson(new Guid(lessonId));
+            return Ok();
+        }
+
     }
 }

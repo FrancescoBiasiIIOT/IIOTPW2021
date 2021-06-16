@@ -35,6 +35,10 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
             }
             State = ClassroomState.Libero;
         }
+        public void SetBusy()
+        {
+            State = ClassroomState.Occupata;
+        }
 
     }
     public enum FloorState

@@ -8,6 +8,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
 {
     public interface IIotHubService
     {
-        void SendMessageToDevice(string message, string deviceId);
+        Task SendMessageToDevice(string message, string deviceId);
     }
 }
