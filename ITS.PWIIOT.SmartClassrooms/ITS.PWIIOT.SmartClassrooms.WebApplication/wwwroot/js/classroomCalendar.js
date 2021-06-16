@@ -10,16 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
  function BuildCalendar(calendarEl, params, url) {
-    return new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridDay',
+     return new FullCalendar.Calendar(calendarEl, {
+        initialView: 'resourceTimeGridDay',
         headerToolbar: {
 
             left: 'prev,next,today',
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
             center: 'title',
         },
-        selectable: true,
-        dateClick: function (info) {
+            selectable: true,
+            dateClick: function (info) {
         },
         select: function (info) {
             $('#addEventModal').modal('show');

@@ -1,4 +1,5 @@
-﻿using ITS.PWIIOT.SmartClassrooms.DTO;
+﻿using ITS.PWIIOT.SmartClassrooms.Domain;
+using ITS.PWIIOT.SmartClassrooms.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
     {
         Task SetClassroomAvailable(string classroomId);
         Task<ClassroomInfo> GetClassroomById(string classroomId);
+        Task<IEnumerable<Building>> GetBuildings();
     }
 }

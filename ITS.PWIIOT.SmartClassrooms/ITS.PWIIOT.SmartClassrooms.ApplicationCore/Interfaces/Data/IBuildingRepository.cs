@@ -9,6 +9,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
     public interface IBuildingRepository
     {
-        public IEnumerable<Building> GetBuildings();
+        Task<IEnumerable<Building>> GetBuildings();
     }
 }

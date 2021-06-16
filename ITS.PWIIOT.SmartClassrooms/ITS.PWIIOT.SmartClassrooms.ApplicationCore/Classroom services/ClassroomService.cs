@@ -13,10 +13,18 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services
     public class ClassroomService : IClassroomService
     {
         private readonly IClassroomRepository _classroomRepository;
+        private readonly IBuildingRepository _buildingRepository;
 
-        public ClassroomService(IClassroomRepository classroomRepository)
+        public ClassroomService(IClassroomRepository classroomRepository, IBuildingRepository buildingRepository)
         {
             _classroomRepository = classroomRepository;
+            _buildingRepository = buildingRepository;
+        }
+
+        public async Task<IEnumerable<Domain.Building>> GetBuildings()
+        {
+            var buildings = await _buildingRepository.GetBuildings();
+            return buildings;
         }
 
         public async Task<ClassroomInfo> GetClassroomById(string classroomId)

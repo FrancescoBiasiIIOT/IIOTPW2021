@@ -14,6 +14,14 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         {
             return lessons.Select(l => l.ToCalendarEvent());
         }
+        public static IEnumerable<CalendarResource> ToCalendarResources(this IEnumerable<Building> buildings)
+        {
+            return buildings.Select(b => b.ToCalendarResource()).OrderBy(b => b.Title);
+        }
+        public static IEnumerable<CalendarResource> ToCalendarResources(this IEnumerable<Classroom> buildings)
+        {
+            return buildings.Select(b => b.ToCalendarResource()).OrderBy(c => c.Title); ;
+        }
 
         private static CalendarEvent ToCalendarEvent(this Lesson lesson)
         {
@@ -21,6 +29,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             {
                 Id = lesson.Id.ToString(),
                 Start = lesson.StartDate,
+                ResourceId = lesson.Classroom.Id.ToString(),
                 End = lesson.EndDate,
                 AllDay = false,
                 Title = $"Aula: {lesson.Classroom.Name} \n " +
@@ -30,6 +39,25 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
 
             };
         }
+        private static CalendarResource ToCalendarResource(this Building building)
+        {
+            return new CalendarResource
+            {
+                Id = building.Id.ToString(),
+                Title = "EDIFICIO: " + building.Name,
+                Children = building.Classrooms.ToCalendarResources()
+
+            };
+        }
+        private static CalendarResource ToCalendarResource(this Classroom classroom)
+        {
+            return new CalendarResource
+            {
+                Id = classroom.Id.ToString(),
+                Title = classroom.GetClassroomId(),
+            };
+        }
+
 
         public static Lesson ToLesson(this CalendarEvent calendarEvent)
         {

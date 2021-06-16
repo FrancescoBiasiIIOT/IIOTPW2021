@@ -18,11 +18,11 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             _smartClassesContext = smartClassesContext;
         }
 
-        public IEnumerable<Building> GetBuildings()
+        public async Task<IEnumerable<Building>> GetBuildings()
         {
-            var buildings = _smartClassesContext.Buildings
+            var buildings = await _smartClassesContext.Buildings
                 .Include(b => b.Classrooms)
-                .ToList();
+                .ToListAsync();
 
             return buildings;
         }

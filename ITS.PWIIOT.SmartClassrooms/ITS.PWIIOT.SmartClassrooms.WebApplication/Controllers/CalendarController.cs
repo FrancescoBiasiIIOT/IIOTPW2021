@@ -1,4 +1,5 @@
 ﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
     public class CalendarController : ControllerBase
     {
         private readonly ILessonRepository _lessonRepository;
+        private readonly IClassroomService _classroomService;
 
-        public CalendarController(ILessonRepository lessonRepository)
+        public CalendarController(ILessonRepository lessonRepository, IClassroomService classroomService)
         {
             _lessonRepository = lessonRepository;
+            _classroomService = classroomService;
         }
 
         [HttpGet]
@@ -32,9 +35,26 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
         public async Task<IActionResult> GetByCourse(DateTime start, DateTime? end, string courseId)
         {
             var lessons = await _lessonRepository.GetLessonsByCourse(start, end, new Guid(courseId));
-            var events = CalendarExtensions.ToCalendarEvents(lessons);
+            var events = lessons.ToCalendarEvents();
             return Ok(events);
         }
+        [Route("classrooms")]
+        [HttpGet]
+        public async Task<IActionResult> Get(DateTime start, DateTime end)
+        {
+            var lessons = await _lessonRepository.GetLessons(start, end);
+            var events = lessons.ToCalendarEvents();
+            return Ok(events);
+        }
+        [Route("buildings")]
+        [HttpGet]
+        public async Task<IActionResult> GetBuildings()
+        {
+            var buildings = await _classroomService.GetBuildings();
+            var events = buildings.ToCalendarResources();
+            return Ok(events);
+        }
+
 
         [HttpDelete]
         public async Task<IActionResult> Delete(string lessonId)

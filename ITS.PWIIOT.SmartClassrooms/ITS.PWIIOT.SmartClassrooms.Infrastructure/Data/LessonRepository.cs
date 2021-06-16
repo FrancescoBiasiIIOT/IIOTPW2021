@@ -31,13 +31,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public async Task<IEnumerable<Lesson>> GetLessons(DateTime start, DateTime end)
         {
             var lessons = await _smartClassesContext.Lessons
-                .Include(l => l.Classroom)
-                    .ThenInclude(c => c.Building)
-                .Include(l => l.Teacher)
-                .Include(l => l.Subject)
-                .Include(l => l.Course)
-                .Where(l => l.StartDate >= start)
-                .ToListAsync();
+    .Include(l => l.Teacher)
+    .Include(l => l.Course)
+    .Include(l => l.Subject)
+    .Include(l => l.Classroom)
+        .ThenInclude(c => c.Building)
+    .ToListAsync();
+            lessons = lessons.Where(l => l.StartDate >= start && l.EndDate <= end).ToList();
 
             return lessons;
         }
