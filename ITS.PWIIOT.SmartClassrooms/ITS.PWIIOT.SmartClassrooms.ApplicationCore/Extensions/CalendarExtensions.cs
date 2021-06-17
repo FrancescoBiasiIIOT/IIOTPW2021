@@ -33,14 +33,9 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
                 End = lesson.EndDate,
                 AllDay = false,
                 Title =
-                $"{lesson.Teacher.GetFullName()} <br /> " +
-                $"{lesson.Subject.Name} <br> " +
-                $"{lesson.Course.Name} <br>",
-                Description =
-                $"{lesson.Teacher.GetFullName()} <br /> " +
-                $"{lesson.Subject.Name} <br> " +
-                $"{lesson.Course.Name} <br>"
-
+                $"{lesson.Teacher.GetFullName()}, " +
+                $"{lesson.Subject.Name}, " +
+                $"{lesson.Course.Name} ",
 
             };
         }
