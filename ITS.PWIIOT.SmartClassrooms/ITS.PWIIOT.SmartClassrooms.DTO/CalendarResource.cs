@@ -10,6 +10,13 @@ namespace ITS.PWIIOT.SmartClassrooms.DTO
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public IEnumerable<CalendarResource> Children { get; set; }
+        public IEnumerable<CalendarChildResource> Children { get; set; }
+    }
+
+    public class CalendarChildResource
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+
     }
 }

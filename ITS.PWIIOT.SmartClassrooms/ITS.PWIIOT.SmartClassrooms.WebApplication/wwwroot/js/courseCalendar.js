@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function BuildCalendar(calendarEl, params, url) {
     return new FullCalendar.Calendar(calendarEl, {
+        schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'timeGridDay',
         headerToolbar: {
 
@@ -19,6 +20,11 @@ function BuildCalendar(calendarEl, params, url) {
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
             center: 'title',
         },
+        slotLabelFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+        },
+        navLinks: true,
         locale: 'it',
         slotMinTime: '08:00',
         slotMaxTime: '21:00',

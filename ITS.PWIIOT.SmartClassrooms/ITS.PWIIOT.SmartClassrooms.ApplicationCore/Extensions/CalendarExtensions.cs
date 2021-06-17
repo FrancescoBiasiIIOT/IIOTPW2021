@@ -18,7 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         {
             return buildings.Select(b => b.ToCalendarResource()).OrderBy(b => b.Title);
         }
-        public static IEnumerable<CalendarResource> ToCalendarResources(this IEnumerable<Classroom> buildings)
+        public static IEnumerable<CalendarChildResource> ToCalendarResources(this IEnumerable<Classroom> buildings)
         {
             return buildings.Select(b => b.ToCalendarResource()).OrderBy(c => c.Title); ;
         }
@@ -32,10 +32,15 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
                 ResourceId = lesson.Classroom.Id.ToString(),
                 End = lesson.EndDate,
                 AllDay = false,
-                Title = $"Aula: {lesson.Classroom.Name} \n " +
-                $"{lesson.Teacher.Name} {lesson.Teacher.Surname}" +
-                $" \n {lesson.Subject.Name}" + 
-                $"\n Corso {lesson.Course.Name}"
+                Title =
+                $"{lesson.Teacher.GetFullName()} <br /> " +
+                $"{lesson.Subject.Name} <br> " +
+                $"{lesson.Course.Name} <br>",
+                Description =
+                $"{lesson.Teacher.GetFullName()} <br /> " +
+                $"{lesson.Subject.Name} <br> " +
+                $"{lesson.Course.Name} <br>"
+
 
             };
         }
@@ -44,17 +49,17 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             return new CalendarResource
             {
                 Id = building.Id.ToString(),
-                Title = "EDIFICIO: " + building.Name,
+                Title = ("EDIFICIO " + building.Name).Trim(),
                 Children = building.Classrooms.ToCalendarResources()
 
             };
         }
-        private static CalendarResource ToCalendarResource(this Classroom classroom)
+        private static CalendarChildResource ToCalendarResource(this Classroom classroom)
         {
-            return new CalendarResource
+            return new CalendarChildResource
             {
                 Id = classroom.Id.ToString(),
-                Title = classroom.GetClassroomId(),
+                Title = (classroom.GetClassroomId()).Trim(),
             };
         }
 

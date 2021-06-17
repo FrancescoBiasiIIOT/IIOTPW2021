@@ -14,36 +14,35 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
     [Route("[controller]")]
     public class CalendarController : ControllerBase
     {
-        private readonly ILessonRepository _lessonRepository;
+        private readonly ICalendarService _calendarService;
+        private readonly ILessonService lessonService;
         private readonly IClassroomService _classroomService;
 
-        public CalendarController(ILessonRepository lessonRepository, IClassroomService classroomService)
+        public CalendarController(IClassroomService classroomService, ICalendarService calendarService, ILessonService lessonService)
         {
-            _lessonRepository = lessonRepository;
             _classroomService = classroomService;
+            _calendarService = calendarService;
+            this.lessonService = lessonService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetByClassroom(DateTime start, DateTime? end, string classroomId)
         {
-            var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, classroomId);
-            var events = CalendarExtensions.ToCalendarEvents(lessons);
+            var events = await _calendarService.GetEventByClassroom(start, end, classroomId);
             return Ok(events);
         }
         [Route("course")]
         [HttpGet]
         public async Task<IActionResult> GetByCourse(DateTime start, DateTime? end, string courseId)
         {
-            var lessons = await _lessonRepository.GetLessonsByCourse(start, end, new Guid(courseId));
-            var events = lessons.ToCalendarEvents();
+            var events = await _calendarService.GetEventByCourse(start, end, new Guid(courseId));
             return Ok(events);
         }
         [Route("classrooms")]
         [HttpGet]
-        public async Task<IActionResult> Get(DateTime start, DateTime end)
+        public async Task<IActionResult> Get(DateTime start, DateTime? end)
         {
-            var lessons = await _lessonRepository.GetLessons(start, end);
-            var events = lessons.ToCalendarEvents();
+            var events = await _calendarService.GetEvent(start, end);
             return Ok(events);
         }
         [Route("buildings")]
@@ -59,7 +58,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(string lessonId)
         {
-            await _lessonRepository.DeleteLesson(new Guid(lessonId));
+            await lessonService.DeleteLesson(new Guid(lessonId));
             return Ok();
         }
 

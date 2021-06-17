@@ -69,6 +69,16 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
+                            <label for="startTime" class="form-label">Ora inizio</label>
+                            <input type="time"  readonly class="form-control" id="startTime">
+                        </div>
+                        <div class="col-6">
+                            <label for="endTime" class="form-label">Ora fine</label>
+                            <input type="time" readonly  class="form-control" id="endTime">
+                        </div>
+                    </div>
+                    <div class="row" hidden>
+                        <div class="col-6">
                             <label for="startDate" class="form-label">Data inizio</label>
                             <input type="datetime" asp-for="Lesson.StartDate" readonly class="form-control" id="startDate">
                         </div>

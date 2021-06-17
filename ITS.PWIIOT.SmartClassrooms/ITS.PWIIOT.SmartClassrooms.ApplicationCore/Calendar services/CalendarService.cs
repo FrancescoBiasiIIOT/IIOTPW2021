@@ -26,11 +26,18 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
             await _lessonRepository.InsertLesson(lesson);
         }
 
-        public async Task<IEnumerable<CalendarEvent>> GetEventBy(DateTime start, DateTime? end, string classRoomId)
+        public async Task<IEnumerable<CalendarEvent>> GetEvent(DateTime start, DateTime? end)
+        {
+            var lessons = await _lessonRepository.GetLessons(start, (DateTime)end);
+            var events = lessons.ToCalendarEvents();
+            return events;
+        }
+
+        public async Task<IEnumerable<CalendarEvent>> GetEventByClassroom(DateTime start, DateTime? end, string classRoomId)
         {
             //AGGIUNGERE LOGICA DI MODIFICA
             var lessons = await _lessonRepository.GetLessonsByClassroom(start, end, classRoomId);
-            var events = CalendarExtensions.ToCalendarEvents(lessons);
+            var events = lessons.ToCalendarEvents();
             return events;
         }
 
