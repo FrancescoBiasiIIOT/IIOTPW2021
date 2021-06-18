@@ -8,11 +8,11 @@ const config = require('./config.json');  //Stringa di connessione al Device
 
 var connectionString = config.connectionString;
 
-
+/*  // Questo serve per la seriale
 //gestione errori
 port.on('error', function(err) {
     console.log('Error: ', err.message)
-});
+});*/
 
 
 //ricezione messaggio-----------------------------
