@@ -23,7 +23,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             return buildings.Select(b => b.ToCalendarResource()).OrderBy(c => c.Title); ;
         }
 
-        private static CalendarEvent ToCalendarEvent(this Lesson lesson)
+        public static CalendarEvent ToCalendarEvent(this Lesson lesson)
         {
             return new CalendarEvent
             {

@@ -13,6 +13,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
         Task<IEnumerable<CalendarEvent>> GetEventByTeacher(DateTime start, DateTime? end, Guid teacherId);
         Task<IEnumerable<CalendarEvent>> GetEventByCourse(DateTime start, DateTime? end, Guid courseId);
         Task<IEnumerable<CalendarEvent>> GetEvent(DateTime start, DateTime? end);
+        Task<CalendarEvent> GetEventById(Guid id);
         Task AddEvent(CalendarEvent newCalendarEvent);
     }
 }

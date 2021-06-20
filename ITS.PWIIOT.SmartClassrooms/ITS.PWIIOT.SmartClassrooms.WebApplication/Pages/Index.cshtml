@@ -23,7 +23,7 @@
 <h1>CORSI</h1>
 @foreach (var item in Model.Courses)
 {
-    <a class="btn btn-primary" asp-page="/course/calendar" asp-route-courseId=@item.Id>@item.Name</a>
+    <a class="btn btn-primary" asp-page="/courses/calendar" asp-route-courseId=@item.Id>@item.Name</a>
 }
 <hr />
 

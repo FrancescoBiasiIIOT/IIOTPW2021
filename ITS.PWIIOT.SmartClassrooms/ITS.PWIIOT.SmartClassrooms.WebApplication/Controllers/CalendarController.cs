@@ -31,7 +31,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
             var events = await _calendarService.GetEventByClassroom(start, end, classroomId);
             return Ok(events);
         }
-        [Route("course")]
+        [Route("courses")]
         [HttpGet]
         public async Task<IActionResult> GetByCourse(DateTime start, DateTime? end, string courseId)
         {
@@ -45,12 +45,19 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
             var events = await _calendarService.GetEvent(start, end);
             return Ok(events);
         }
+        [Route("event")]
+        [HttpGet]
+        public async Task<IActionResult> GetEvent(string eventId)
+        {
+            var lessonEvent = await _calendarService.GetEventById(new Guid(eventId));
+            return Ok(lessonEvent);
+        }
 
         [Route("teachers")]
         [HttpGet]
         public async Task<IActionResult> GetByTeacher(DateTime start, DateTime? end, string teacherId)
         {
-            var events = await _calendarService.GetEvent(start, end);
+            var events = await _calendarService.GetEventByTeacher(start, end, new Guid(teacherId));
             return Ok(events);
         }
         [Route("buildings")]

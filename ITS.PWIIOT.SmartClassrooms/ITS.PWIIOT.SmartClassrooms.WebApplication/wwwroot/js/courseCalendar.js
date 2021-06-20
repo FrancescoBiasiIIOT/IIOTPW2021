@@ -1,6 +1,6 @@
 
 const course = document.getElementById("courseId");
-const url = '/calendar/course'
+const url = '/calendar/courses'
 var calendarEl = document.getElementById('calendar');
 const params = { courseId: course.value }
 

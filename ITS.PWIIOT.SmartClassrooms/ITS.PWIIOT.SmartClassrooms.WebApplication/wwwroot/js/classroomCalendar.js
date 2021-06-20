@@ -36,6 +36,18 @@ function BuildCalendar(calendarEl, params, url) {
             startTime.value = new Date(info.startStr).toISOString().substring(11, 16);
             endTime.value = new Date(info.endStr).toISOString().substring(11, 16);
         },
+        eventClick: function (info) {
+            var eventObj = info.event;
+            $('#addEventModal').modal('show');
+            fetch(url + "/event?eventId=" + eventObj.id).then((response) => {
+                return response.json();  // converting byte data to json
+            }).then(data => {
+                startDate.value = data.start;
+                endDate.value = data.end;
+                startTime.value = new Date(data.start).toISOString().substring(11, 16);
+                endTime.value = new Date(data.end).toISOString().substring(11, 16);
+            })
+        },
         eventDidMount: function (info) {
             $(info.el).find(".fc-event-main").prepend("<span class='closeon test'>X</span>");
             $(info.el).find(".closeon").click(function () {
