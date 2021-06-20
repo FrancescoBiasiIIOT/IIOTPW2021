@@ -9,22 +9,29 @@
 <div class="card-group d-flex flex-wrap">
     @foreach (var item in Model.Classrooms)
     {
-            <div class="card mr-3" style="width: 18rem;">
-                <div class="card-body">
-                    <a class="card-title" asp-page="/classrooms/calendar" asp-route-classroomId=@item.GetClassroomId()>@item.GetClassroomId()</a>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"></li>
-                </ul>
+        <div class="card mr-3" style="width: 18rem;">
+            <div class="card-body">
+                <a class="card-title" asp-page="/classrooms/calendar" asp-route-classroomId=@item.GetClassroomId()>@item.GetClassroomId()</a>
             </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+            </ul>
+        </div>
     }
-    </div>
+</div>
 
-    <h1>CORSI</h1>
-    @foreach (var item in Model.Courses)
-    {
-        <a class="btn btn-primary" asp-page="/course/calendar" asp-route-courseId=@item.Id>@item.Name</a>
-    }
-    <hr />
+<h1>CORSI</h1>
+@foreach (var item in Model.Courses)
+{
+    <a class="btn btn-primary" asp-page="/course/calendar" asp-route-courseId=@item.Id>@item.Name</a>
+}
+<hr />
+
+<h1>Docenti</h1>
+@foreach (var item in Model.Teachers)
+{
+    <a class="btn btn-primary" asp-page="/teachers/calendar" asp-route-teacherId=@item.Id>@item.Name</a>
+}
+<hr />
 
 

@@ -1,0 +1,13 @@
+﻿@page "{teacherId}"
+@model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Teachers.CalendarModel
+@{
+}
+
+<input type="text" id="teacherId" value="@Model.Teacher.Id" hidden />
+<h1>@Model.Teacher.FullName</h1>
+<div class="mt-3" id='calendar'></div>
+
+
+
+
+<script src="~/js/teacherCalendar.js"></script>

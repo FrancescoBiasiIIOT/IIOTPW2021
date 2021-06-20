@@ -47,5 +47,12 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
             var events = CalendarExtensions.ToCalendarEvents(lessons);
             return events;
         }
+
+        public async Task<IEnumerable<CalendarEvent>> GetEventByTeacher(DateTime start, DateTime? end, Guid teacherId)
+        {
+            var lessons = await _lessonRepository.GetLessonsByTeacher(start, end, teacherId);
+            var events = CalendarExtensions.ToCalendarEvents(lessons);
+            return events;
+        }
     }
 }

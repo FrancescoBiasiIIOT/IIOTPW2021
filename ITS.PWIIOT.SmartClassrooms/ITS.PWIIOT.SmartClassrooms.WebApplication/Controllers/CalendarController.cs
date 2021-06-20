@@ -45,6 +45,14 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
             var events = await _calendarService.GetEvent(start, end);
             return Ok(events);
         }
+
+        [Route("teachers")]
+        [HttpGet]
+        public async Task<IActionResult> GetByTeacher(DateTime start, DateTime? end, string teacherId)
+        {
+            var events = await _calendarService.GetEvent(start, end);
+            return Ok(events);
+        }
         [Route("buildings")]
         [HttpGet]
         public async Task<IActionResult> GetBuildings()

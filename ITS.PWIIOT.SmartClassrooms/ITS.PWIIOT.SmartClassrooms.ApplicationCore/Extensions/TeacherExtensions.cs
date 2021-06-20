@@ -15,7 +15,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
             return teachers.Select(t => t.ToTeacherInfo());
         }
 
-        private static TeacherInfo ToTeacherInfo(this Teacher teacher)
+        public static TeacherInfo ToTeacherInfo(this Teacher teacher)
         {
             return new TeacherInfo
             {

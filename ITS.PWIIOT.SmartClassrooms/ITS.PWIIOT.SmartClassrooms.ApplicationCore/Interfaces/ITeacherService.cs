@@ -10,5 +10,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
     public interface ITeacherService
     {
         Task<IEnumerable<TeacherInfo>> GetTeachers();
+        Task<TeacherInfo> GetTeacherById(Guid id);
     }
 }

@@ -19,6 +19,12 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Teacher_services
             _teacherRepository = teacherRepository;
         }
 
+        public async Task<TeacherInfo> GetTeacherById(Guid id)
+        {
+            var teacher = await _teacherRepository.GetTeacherById(id);
+            return teacher.ToTeacherInfo();
+        }
+
         public async Task<IEnumerable<TeacherInfo>> GetTeachers()
         {
             var teachers = await _teacherRepository.GetTeachers();
