@@ -9,6 +9,11 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
 {
     public static class DeviceMessageExtensions
     {
+        public static  IEnumerable<DeviceMessage> ToDeviceMessage(this IEnumerable<Lesson> lesson, string microcontrollerId, MessageOperation messageOperation)
+        {
+            return lesson.Select(l => l.ToDeviceMessage(microcontrollerId, messageOperation));
+
+        }
         public static DeviceMessage ToDeviceMessage(this Lesson lesson, string microcontrollerId, MessageOperation messageOperation)
         {
             return new DeviceMessage

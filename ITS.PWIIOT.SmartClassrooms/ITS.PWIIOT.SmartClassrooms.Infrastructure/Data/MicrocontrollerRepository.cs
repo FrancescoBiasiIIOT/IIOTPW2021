@@ -22,7 +22,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         {
             var classrooms = await _smartClassesContext.Microcontrollers
                 .Include(m => m.Classroom)
-                    .ThenInclude(c => c.Building)
                 .Include(m => m.Gateway)
                 .ToListAsync();
             var classroom = classrooms.Where(c => c.Classroom.GetClassroomId() == id)

@@ -25,7 +25,7 @@ namespace ITS.PWIIOT.SmartClassrooms.TestWorker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var message = await _deviceService.ReceiveMessageFromHub("RB100");
+                var message = await _deviceService.ReceiveMessageFromHub("TestDato");
                 Lesson lesson = JsonSerializer.Deserialize<Lesson>(message);
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);

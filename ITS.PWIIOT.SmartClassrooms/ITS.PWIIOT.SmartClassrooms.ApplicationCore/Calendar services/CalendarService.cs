@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
@@ -14,16 +15,23 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
     public class CalendarService : ICalendarService
     {
         private readonly ILessonRepository _lessonRepository;
+        private readonly IIotHubService iotHubService;
 
-        public CalendarService(ILessonRepository lessonRepository)
+        public CalendarService(ILessonRepository lessonRepository, IIotHubService iotHubService)
         {
             _lessonRepository = lessonRepository;
+            this.iotHubService = iotHubService;
         }
 
         public async Task AddEvent(CalendarEvent newCalendarEvent)
         {
             var lesson = CalendarExtensions.ToLesson(newCalendarEvent);
             await _lessonRepository.InsertLesson(lesson);
+        }
+
+        public async Task GetDayCalendar(DateTime start, DateTime? end)
+        {
+            
         }
 
         public async Task<IEnumerable<CalendarEvent>> GetEvent(DateTime start, DateTime? end)
@@ -60,6 +68,29 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services
             var lessons = await _lessonRepository.GetLessonsByTeacher(start, end, teacherId);
             var events = CalendarExtensions.ToCalendarEvents(lessons);
             return events;
+        }
+
+        private async Task BuildCalendar(DateTime start, DateTime? end)
+        {
+            CalendarPlanner calendar = new CalendarPlanner(MessageOperation.Calendar);
+            var lessons = await _lessonRepository.GetLessons(start, (DateTime)end);
+            var classrooms = lessons.Select(l => l.Classroom.GetClassroomId());
+            List<ClassroomCalendar> classroomCalendars = new List<ClassroomCalendar>();
+            foreach (var classroom in classrooms)
+            {
+                var classroomLessons = lessons.Where(l => l.Classroom.GetClassroomId() == classroom);
+                var gatewayId = "TestDato";
+                ClassroomCalendar classroomCalendar = new ClassroomCalendar
+                {
+                    ClassroomId = classroom,
+                    Lessons = classroomLessons.ToDeviceMessage(gatewayId, MessageOperation.Calendar)
+                };
+                classroomCalendars.Add(classroomCalendar);
+                calendar.ClassroomsCalendar = classroomCalendars;
+                await iotHubService.SendMessageToDevice(JsonSerializer.Serialize(classroomCalendar), "TestDato");
+            }
+            calendar.ClassroomsCalendar = classroomCalendars;
+
         }
     }
 }

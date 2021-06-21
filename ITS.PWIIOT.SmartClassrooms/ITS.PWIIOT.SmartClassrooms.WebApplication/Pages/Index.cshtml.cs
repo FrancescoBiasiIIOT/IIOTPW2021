@@ -20,12 +20,14 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
         public IEnumerable<Domain.Course> Courses { get; set; }
         public IEnumerable<Domain.Teacher> Teachers { get; set; }
         private readonly ICourseRepository _courseRepository;
+        private readonly ICalendarService calendarService;
         private readonly ITeacherRepository teacherRepository;
-        public IndexModel(ILogger<IndexModel> logger, IClassroomRepository classroomRepository, ICourseRepository courseRepository, ITeacherRepository teacherRepository)
+        public IndexModel(ILogger<IndexModel> logger, IClassroomRepository classroomRepository, ICourseRepository courseRepository, ITeacherRepository teacherRepository, ICalendarService calendarService)
         {
             this.classroomRepository = classroomRepository;
             _courseRepository = courseRepository;
             this.teacherRepository = teacherRepository;
+            this.calendarService = calendarService;
         }
 
         public async Task OnGet()

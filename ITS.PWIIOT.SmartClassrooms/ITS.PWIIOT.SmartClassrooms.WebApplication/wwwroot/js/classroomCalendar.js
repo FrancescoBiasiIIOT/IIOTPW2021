@@ -39,13 +39,13 @@ function BuildCalendar(calendarEl, params, url) {
         eventClick: function (info) {
             var eventObj = info.event;
             $('#addEventModal').modal('show');
-            fetch(url + "/event?eventId=" + eventObj.id).then((response) => {
+            fetch("/lesson?id=" + eventObj.id).then((response) => {
                 return response.json();  // converting byte data to json
             }).then(data => {
-                startDate.value = data.start;
-                endDate.value = data.end;
-                startTime.value = new Date(data.start).toISOString().substring(11, 16);
-                endTime.value = new Date(data.end).toISOString().substring(11, 16);
+                startDate.value = data.startDate;
+                endDate.value = data.endDate;
+                startTime.value = new Date(data.startDate).toISOString().substring(11, 16);
+                endTime.value = new Date(data.endDate).toISOString().substring(11, 16);
             })
         },
         eventDidMount: function (info) {

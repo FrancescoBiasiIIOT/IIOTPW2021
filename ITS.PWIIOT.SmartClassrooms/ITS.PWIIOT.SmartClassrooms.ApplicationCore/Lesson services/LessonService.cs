@@ -43,9 +43,8 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             await _lessonRepository.InsertLesson(lesson);
             if(lessonInfo.StartDate.Date == DateTime.Now.Date)
             {
-                //invio messaggio di notifica al device
-                var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-              //  await SendMessageToDevice(lesson, device, MessageOperation.Add);
+                //var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+                //await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 
@@ -54,6 +53,13 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             await _lessonRepository.DeleteLesson(id);
 
         }
+
+        public async Task<LessonInfo> GetLessonById(Guid id)
+        {
+            var lesson = await _lessonRepository.GetLessonById(id);
+            return lesson.ToLessonInfo();
+        }
+
         private async Task SendMessageToDevice(Lesson lesson, Microcontroller microcontroller, MessageOperation operation)
         {
             var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);

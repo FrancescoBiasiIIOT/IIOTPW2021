@@ -27,5 +27,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         Add = 0,
         Update = 1,
         Delete = 2,
+        Calendar = 3
     }
 }

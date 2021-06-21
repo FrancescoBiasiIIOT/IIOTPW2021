@@ -18,5 +18,18 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
                 EndDate = (DateTime)lesson.EndDate,
             };
         }
+        public static LessonInfo ToLessonInfo(this Lesson lesson)
+        {
+            return new LessonInfo
+            {
+                StartDate = lesson.StartDate,
+                EndDate = lesson.EndDate,
+                ClassroomId = lesson.Classroom.GetClassroomId(),
+                CourseId = lesson.CourseId,
+                SubjectId = lesson.SubjectId,
+                TeacherId = lesson.TeacherId
+
+            };
+        }
     }
 }

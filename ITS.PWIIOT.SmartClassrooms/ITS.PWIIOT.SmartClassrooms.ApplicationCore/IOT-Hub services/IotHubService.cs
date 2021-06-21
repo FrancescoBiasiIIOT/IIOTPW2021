@@ -18,7 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services
         {
             _configuration = configuration;
             _iotHubConnectionString = _configuration.GetConnectionString("IotHub");
-       //     serviceClient = ServiceClient.CreateFromConnectionString(_iotHubConnectionString);
+             serviceClient = ServiceClient.CreateFromConnectionString(_iotHubConnectionString);
         }
         public async Task SendMessageToDevice(string message, string deviceId)
         {

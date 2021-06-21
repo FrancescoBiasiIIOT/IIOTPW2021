@@ -11,5 +11,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
     {
         Task AddNewLesson(LessonInfo lessonInfo);
         Task DeleteLesson(Guid id);
+        Task<LessonInfo> GetLessonById(Guid id);
     }
 }
