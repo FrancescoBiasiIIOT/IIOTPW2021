@@ -1,1 +1,31 @@
-{"Operation":3,"ClassroomsCalendar":[{"ClassroomId":"S3","Lessons":[{"LessonId":"2c57a11f-b57b-4a16-88ba-08d93486dd87","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"sistemi embedded","StartDate":"2021-06-21T09:30:00","Duration":{"Ticks":216000000000,"Days":0,"Hours":6,"Milliseconds":0,"Minutes":0,"Seconds":0,"TotalDays":0.25,"TotalHours":6,"TotalMilliseconds":21600000,"TotalMinutes":360,"TotalSeconds":21600},"Operation":3},{"LessonId":"265a8d61-c2e9-4da2-05f6-08d9348a621c","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"Sistemi","StartDate":"2021-06-21T16:00:00","Duration":{"Ticks":72000000000,"Days":0,"Hours":2,"Milliseconds":0,"Minutes":0,"Seconds":0,"TotalDays":0.08333333333333333,"TotalHours":2,"TotalMilliseconds":7200000,"TotalMinutes":120,"TotalSeconds":7200},"Operation":3},{"LessonId":"f7ee57e5-a415-497e-572c-08d9348c6527","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"Sistemi","StartDate":"2021-06-21T18:30:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3},{"LessonId":"20c3e85c-1d1f-4cf3-6119-08d9348cbed4","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"Programmazione C#","StartDate":"2021-06-21T09:00:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3},{"LessonId":"ef2ae0b1-555c-4c90-0fcc-08d9348d0716","MicrocontrollerId":"TestDato","Teacher":"Andrea Dottor","Subject":"Diritto aziendale","StartDate":"2021-06-21T19:30:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3},{"LessonId":"ede29237-7a91-4afe-d3e8-08d9348fda61","MicrocontrollerId":"TestDato","Teacher":"Andrea Dottor","Subject":"Diritto aziendale","StartDate":"2021-06-21T15:30:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3},{"LessonId":"743ed6c0-bd1e-48c7-d3e9-08d9348fda61","MicrocontrollerId":"TestDato","Teacher":"Andrea Dottor","Subject":"Diritto aziendale","StartDate":"2021-06-21T15:30:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3},{"LessonId":"9b3fab67-170d-4623-caf5-08d9349ad763","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"Sistemi","StartDate":"2021-06-21T08:00:00","Duration":{"Ticks":36000000000,"Days":0,"Hours":1,"Milliseconds":0,"Minutes":0,"Seconds":0,"TotalDays":0.041666666666666664,"TotalHours":1,"TotalMilliseconds":3600000,"TotalMinutes":60,"TotalSeconds":3600},"Operation":3},{"LessonId":"6f327ae5-441d-4dfb-caf7-08d9349ad763","MicrocontrollerId":"TestDato","Teacher":"Daniele Gobbo","Subject":"Diritto aziendale","StartDate":"2021-06-21T18:00:00","Duration":{"Ticks":18000000000,"Days":0,"Hours":0,"Milliseconds":0,"Minutes":30,"Seconds":0,"TotalDays":0.020833333333333332,"TotalHours":0.5,"TotalMilliseconds":1800000,"TotalMinutes":30,"TotalSeconds":1800},"Operation":3}]}]}
+{
+    "Operation": 3,
+    "ClassroomsCalendar": [
+        {
+            "ClassroomId": "S3",
+            "Lessons": [
+                {
+                    "LessonId": "2c57a11f-b57b-4a16-88ba-08d93486dd87",
+                    "MicrocontrollerId": "TestDato",
+                    "Teacher": "Daniele Gobbo",
+                    "Subject": "sistemi embedded",
+                    "StartDate": "2021-06-21T15:39:00",
+                    "Duration": {
+                        "Ticks": 216000000000,
+                        "Days": 0,
+                        "Hours": 6,
+                        "Milliseconds": 0,
+                        "Minutes": 0,
+                        "Seconds": 0,
+                        "TotalDays": 0.25,
+                        "TotalHours": 6,
+                        "TotalMilliseconds": 21600000,
+                        "TotalMinutes": 360,
+                        "TotalSeconds": 21600
+                    },
+                    "Operation": 3
+                }
+            ]
+        }
+    ]
+}
