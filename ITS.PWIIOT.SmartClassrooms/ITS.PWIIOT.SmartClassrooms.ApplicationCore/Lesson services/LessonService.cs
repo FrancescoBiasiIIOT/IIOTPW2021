@@ -43,7 +43,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             await _lessonRepository.InsertLesson(lesson);
             if(lessonInfo.StartDate.Date == DateTime.Now.Date)
             {
-                //var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+                var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
                 //await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }

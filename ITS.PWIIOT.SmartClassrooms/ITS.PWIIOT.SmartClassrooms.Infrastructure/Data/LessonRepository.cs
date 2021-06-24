@@ -31,12 +31,12 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public async Task<Lesson> GetLessonById(Guid id)
         {
             var lessons = await _smartClassesContext.Lessons
-.Include(l => l.Teacher)
-.Include(l => l.Course)
-.Include(l => l.Subject)
-.Include(l => l.Classroom)
-.ThenInclude(c => c.Building)
-.ToListAsync();
+            .Include(l => l.Teacher)
+            .Include(l => l.Course)
+            .Include(l => l.Subject)
+            .Include(l => l.Classroom)
+            .ThenInclude(c => c.Building)
+            .ToListAsync();
             var lesson = lessons.Where(l => l.Id == id).FirstOrDefault();
 
             return lesson;

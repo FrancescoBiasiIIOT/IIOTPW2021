@@ -13,23 +13,21 @@ namespace ITS.PWIIOT.SmartClassrooms.TestWorker
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
-        private readonly IDeviceService _deviceService;
-        public Worker(ILogger<Worker> logger, IDeviceService deviceService)
+        private readonly IMessage _message;
+        public Worker(IMessage message)
         {
-            _logger = logger;
-            _deviceService = deviceService;
+            _message = message;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                var message = await _deviceService.ReceiveMessageFromHub("TestDato");
-                Lesson lesson = JsonSerializer.Deserialize<Lesson>(message);
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            await _message.StartReceiveMessagesFromSubscriptionAsync(
+          message =>
+          {
+              Console.WriteLine(message);
+              //NOTIFICARE A TUTTI I CLIENT CHE L'AULA è LIBERA
+          }, "notify");
         }
     }
 }
+

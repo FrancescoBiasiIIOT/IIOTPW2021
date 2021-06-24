@@ -1,4 +1,6 @@
 ﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -10,33 +12,26 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
 {
     public class ReceiverWorker : BackgroundService
     {
-        //Worker per ricevere i messaggi dal dispositivo 
-        /*
-        private readonly IMessage _message;
-        private readonly IClassroomService _classroomService;
-        public ReceiverWorker(IMessage message, IClassroomService classroomService)
+
+        public IServiceScopeFactory _serviceScopeFactory { get; set; }
+        public ReceiverWorker(IServiceScopeFactory serviceScopeFactory)
         {
-            _message = message;
-            _classroomService = classroomService;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _message.StartReceiveMessagesFromSubscriptionAsync(
-          message =>
-          { 
-                _classroomService.SetClassroomAvailable("");
-              //NOTIFICARE A TUTTI I CLIENT CHE L'AULA è LIBERA
-          }, "ITS/classroom/available");
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var message = scope.ServiceProvider.GetRequiredService<IMessage>();
+                await message.StartReceiveMessagesFromSubscriptionAsync(
+                message =>
+                {
+                   
+                }, "storage");
+                // now do your work
+            }
         }
-        */
-        public ReceiverWorker()
-        {
 
-        }
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-
-        }
     }
 }

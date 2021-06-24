@@ -1,5 +1,6 @@
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -21,7 +22,7 @@ namespace ITS.PWIIOT.SmartClassrooms.TestWorker
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
-                    services.AddSingleton<IDeviceService, DeviceService>();
+                    services.AddSingleton<IMessage, ServiceBusService>();
                 });
     }
 }
