@@ -30,7 +30,7 @@
 
 #include <xc.h>
 #include <sys/attribs.h>
-#include <lcd.h>
+#include "lcd.h"
 
 /*0 = non sto ricevendo, il prossimo pacchetto dovrebbe contenere un id
   1 = ho ricevuto l'id, il prossimo pacchetto dovrebbe contenere il tipo di messaggio
