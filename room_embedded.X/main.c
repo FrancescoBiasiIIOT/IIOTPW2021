@@ -41,6 +41,8 @@ char msgContent[33];
 char notForMe = 0;
 char i = 0, j;
 
+const char msgLength[] = {33,1,1,3};
+
 void initUART(void);
 
 int main(void)
@@ -75,24 +77,60 @@ void initUART(){
     U1MODEbits.ON = 1;
 }
 
+void resetProtocolSteps(){
+    //Resetta variabili
+    protocolStep = 0; //Contatore che mi dice che tipo di info sto per ricevere
+    i = 0; //Contatore di quanti pacchetti ho ricevuto (dopo i primi due)
+}
+
+void processMsg(){
+    resetProtocolSteps();
+    
+    switch(msgType){
+        case 0: continue;
+                break;
+        case 1: continue;
+                break;
+        case 2: continue;
+                break;
+        case 3: continue;
+                break;
+        default: continue;
+    }
+}
+
 void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
     if(IFS0bits.U1RXIF){
+        
+        //Salvo il byte ricevuto
         char a = U1RXREG;
+        
         switch(protocolStep){
+            //Questo è il primo pacchetto che ricevo, quindi contiene l'id del destinatario
             case 0: readID = a;
                     if(readID != PinguinoID)
                         notForMe = 1;
                     break;
+            //Questo è il secondo pacchetto che ricevo, quindi conterrà il tipo di messaggio
             case 1: msgType = a;
                     break;
+            //Questo è il terzo (o successivo) pacchetto che ricevo, quindi fa parte del "body" del messagio.
+            //Lo salvo in un array che analizzerò dopo.
             default: msgContent[i] = a;
                      i++;
+                    
         }
-        protocolStep++;
-        if(i>32){
-            protocolStep = 0;
-            i = 0;
+        protocolStep++; 
+        
+        if( i >= msgLength[msgType] ){
+            //La variabile 'i' conta quanti pacchetti del body ho letto (viene incrementata a ogni 'default' dello switch sopra).
+            //Se questa condizione è vera, vuol dire che ho ricevuto l'ultimo pacchetto.
+            if(notForMe)
+                resetProtocolSteps();
+            else
+                processMsg();
         }
+        
         IFS0bits.U1RXIF = 0;
     }
 }
