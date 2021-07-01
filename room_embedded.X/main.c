@@ -32,6 +32,7 @@
 #include <sys/attribs.h>
 #include "lcd.h"
 
+////Variabili protocollo UART////
 /*0 = non sto ricevendo, il prossimo pacchetto dovrebbe contenere un id
   1 = ho ricevuto l'id, il prossimo pacchetto dovrebbe contenere il tipo di messaggio
   2 = il prossimo pacchetto va messo da parte*/
@@ -41,24 +42,31 @@ char msgType = 0;
 char msgContent[33];
 char notForMe = 0;
 char i = 0, j;
-
 const char msgLength[] = {33,1,1,3};
+char uartJobNow = 0;
+
+////Variabili gestione display////
+int timeLeft = 0; //Secondi rimanenti alla fine della lezione
 
 void initUART(void);
 
 int main(void)
 {
     initUART();
-    
-    int i;
+    initLcd();
+    printString("Elezioni Roma");
+    goToRow(4);
+    printString("Vota Calenda");
     while(1){
-        //U1TXREG = 0x56;
-        for(i=0; i<100000; i++);
+        /*
+        updateTimeLeft();
+        
+        */
     }
 }
 
 void initUART(){
-        //UART sending config
+    //UART sending config
     U1MODEbits.BRGH = 0;
     U1BRG = 63;
     U1MODEbits.PDSEL = 0;
@@ -84,25 +92,30 @@ void resetProtocolSteps(){
     i = 0; //Contatore di quanti pacchetti ho ricevuto (dopo i primi due)
 }
 
+void fillDisplay(){
+    
+}
+
 void processMsg(){
     resetProtocolSteps();
     
     switch(msgType){
-        case 0: continue;
+        case 0:
                 break;
-        case 1: continue;
+        case 1:
                 break;
-        case 2: continue;
+        case 2:
                 break;
-        case 3: continue;
+        case 3:
                 break;
-        default: continue;
+        default: break;
     }
 }
 
-void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
+void processPackage(){
+    //Come da doc, segnalo tramite questa variabile che sto ricevendo
+    uartJobNow = 2;
     if(IFS0bits.U1RXIF){
-        
         //Salvo il byte ricevuto
         char a = U1RXREG;
         
@@ -126,6 +139,7 @@ void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
         if( i >= msgLength[msgType] ){
             //La variabile 'i' conta quanti pacchetti del body ho letto (viene incrementata a ogni 'default' dello switch sopra).
             //Se questa condizione è vera, vuol dire che ho ricevuto l'ultimo pacchetto.
+            uartJobNow = 0; //Segnalo che ho smesso di ricevere
             if(notForMe)
                 resetProtocolSteps();
             else
@@ -134,4 +148,15 @@ void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
         
         IFS0bits.U1RXIF = 0;
     }
+}
+
+void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
+    if(uartJobNow == 0 || uartJobNow == 2)
+        //Pacchetto esterno
+        processPackage();
+    else
+        //Pacchetto inviato da questa stessa scheda, da controllare
+        if(U1RXREG != U1TXREG)
+            //Collisione!!
+            return;
 }
