@@ -10,6 +10,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
     public interface ILessonService
     {
         Task AddNewLesson(LessonInfo lessonInfo);
+        Task SendLessonBetweenRange(DateTime start, DateTime end);
         Task DeleteLesson(Guid id);
         Task<LessonInfo> GetLessonById(Guid id);
     }

@@ -44,7 +44,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             if(lessonInfo.Duration != null)
             {
                 var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-                await SendMessageToDevice(lesson, device, MessageOperation.Add);
+              //  await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 
@@ -58,6 +58,16 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
         {
             var lesson = await _lessonRepository.GetLessonById(id);
             return lesson.ToLessonInfo();
+        }
+
+        public async Task SendLessonBetweenRange(DateTime start, DateTime end)
+        {
+            var lessons = await _lessonRepository.GetLessonsByStart(start);
+            foreach (var lesson in lessons)
+            {
+                var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+                await SendMessageToDevice(lesson, device, MessageOperation.Add);
+            }
         }
 
         private async Task SendMessageToDevice(Lesson lesson, Microcontroller microcontroller, MessageOperation operation)

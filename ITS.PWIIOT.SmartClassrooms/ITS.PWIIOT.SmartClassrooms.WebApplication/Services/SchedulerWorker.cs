@@ -1,4 +1,7 @@
-﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+﻿using Hangfire;
+using Hangfire.SqlServer;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -13,21 +16,24 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
     {
         //worker per schedulare il calendario
         public IServiceScopeFactory _serviceScopeFactory { get; set; }
-
-        public SchedulerWorker(IServiceScopeFactory serviceScopeFactory)
+        public IConfiguration Configuration{ get; set; }
+        public SchedulerWorker(IServiceScopeFactory serviceScopeFactory, IConfiguration configuration)
         {
             _serviceScopeFactory = serviceScopeFactory;
+            Configuration = configuration;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-
+        { 
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<ILessonService>();
+                var lessonService = scope.ServiceProvider.GetRequiredService<ILessonService>();
+                RecurringJob.AddOrUpdate(
+                    () => lessonService.SendLessonBetweenRange(DateTime.Now, DateTime.Now),
+                    Cron.Minutely);
 
-                // now do your work
             }
+
         }
     }
 }

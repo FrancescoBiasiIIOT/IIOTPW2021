@@ -1,3 +1,5 @@
+using Hangfire;
+using Hangfire.SqlServer;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Course_services;
@@ -58,6 +60,20 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ICalendarService, CalendarService>();
             services.AddScoped<IMicrocontrollerService, MicrocontrollerService>();
             services.AddScoped<IMicrocontrollerRepository, MicrocontrollerRepository>();
+            GlobalConfiguration.Configuration
+ .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+ .UseColouredConsoleLogProvider()
+ .UseSimpleAssemblyNameTypeSerializer()
+ .UseRecommendedSerializerSettings()
+ .UseSqlServerStorage(Configuration.GetConnectionString("DBSQL"), new SqlServerStorageOptions
+ {
+     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+     QueuePollInterval = TimeSpan.Zero,
+     UseRecommendedIsolationLevel = true,
+     UsePageLocksOnDequeue = true,
+     DisableGlobalLocks = true
+ });
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }
 

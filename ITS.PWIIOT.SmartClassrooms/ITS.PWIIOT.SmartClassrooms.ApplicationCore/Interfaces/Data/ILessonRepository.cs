@@ -10,6 +10,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
     public interface ILessonRepository
     {
         Task<IEnumerable<Lesson>> GetLessons(DateTime start, DateTime end);
+        Task<IEnumerable<Lesson>> GetLessonsByStart(DateTime start);
         Task<Lesson> GetLessonById(Guid id);
         Task<IEnumerable<Lesson>> GetLessonsByClassroom(DateTime start, DateTime? end, string classroomId);
         Task<IEnumerable<Lesson>> GetLessonsByCourse(DateTime start, DateTime? end, Guid courseId);

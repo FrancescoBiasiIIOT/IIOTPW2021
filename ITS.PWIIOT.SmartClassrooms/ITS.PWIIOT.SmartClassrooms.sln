@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.Infrastructure", "ITS.PWIIOT.SmartClassrooms.Infrastructure\ITS.PWIIOT.SmartClassrooms.Infrastructure.csproj", "{8AE8BE78-898C-448A-B5B6-677A4C04738B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITS.PWIIOT.SmartClassrooms.TestWorker", "ITS.PWIIOT.SmartClassrooms.TestWorker\ITS.PWIIOT.SmartClassrooms.TestWorker.csproj", "{2FCD4E6F-D030-473C-858A-B15E1A159C9A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE8BE78-898C-448A-B5B6-677A4C04738B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FCD4E6F-D030-473C-858A-B15E1A159C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
