@@ -13,5 +13,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
         Task SetClassroomAvailable(string classroomId);
         Task<ClassroomInfo> GetClassroomById(string classroomId);
         Task<IEnumerable<Building>> GetBuildings();
+        Task<IEnumerable<ClassroomInfo>> GetClassrooms();
     }
 }

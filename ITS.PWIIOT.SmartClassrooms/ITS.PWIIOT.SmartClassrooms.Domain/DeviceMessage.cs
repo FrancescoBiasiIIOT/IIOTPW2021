@@ -8,11 +8,9 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
     public class DeviceMessage
     {
-        public string LessonId { get; set; }
         public string MicrocontrollerId { get; set; }
         public string Teacher { get; set; }
         public string Subject { get; set; }
-        public DateTime StartDate { get; set; }
         public TimeSpan Duration { get; set; }
         public MessageOperation Operation { get; set; }
 

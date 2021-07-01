@@ -6,12 +6,19 @@ document.addEventListener('DOMContentLoaded', function () {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         timeZone: 'UTC',
         initialView: 'resourceTimelineDay',
+        customButtons: {
+            myCustomButton: {
+                text: 'Aggiungi Lezione',
+                click: function () {
+                    $('#addEventModal').modal('show');
+                }
+            }
+        },
         headerToolbar: {
-            left: 'prev,next',
+            left: 'prev,next,myCustomButton',
             center: 'title',
             right: 'today'
         },
-
         resourceAreaWidth: '10%',
         selectable: true,
         navLinks: true,
@@ -20,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
             url: resourcesUrl,
             method: 'GET',
             failure: function () {
-                alert('there was an error while fetching events!');
             },
         },
         slotLabelFormat: {

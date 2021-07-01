@@ -25,7 +25,6 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<ILessonService>();
-                await context.AddNewLesson(new DTO.LessonInfo());
 
                 // now do your work
             }

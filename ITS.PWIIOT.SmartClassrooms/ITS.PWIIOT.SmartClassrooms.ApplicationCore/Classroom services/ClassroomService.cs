@@ -33,6 +33,12 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services
             return classroom.ToClassroomInfo();
         }
 
+        public async Task<IEnumerable<ClassroomInfo>> GetClassrooms()
+        {
+            var classrooms = await _classroomRepository.GetClassrooms();
+            return classrooms.ToClassroomInfo();
+        }
+
         public async Task SetClassroomAvailable(string classroomId)
         {
             var classroom = await _classroomRepository.GetClassroomById(classroomId);

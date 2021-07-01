@@ -14,6 +14,7 @@ namespace ITS.PWIIOT.SmartClassrooms.DTO
         [Required]
         public DateTime? EndDate { get; set; }
         [Required]
+        public int? Duration { get; set; }
         public string ClassroomId { get; set; }
         [Required]
         public Guid TeacherId { get; set; }
