@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
-    public interface ITeacherRepository
+    public interface ILoginRepository
     {
-        public Task<IEnumerable<Teacher>> GetTeachers();
-        public Task<Teacher> GetTeacherById(Guid id);
-        public Task<Teacher> GetTeacherByEmaail(string email);
-
+        Task<User> GetUserByCredential(string username, string password);
     }
 }

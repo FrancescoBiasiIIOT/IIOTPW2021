@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -34,6 +35,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classrooms
         public IEnumerable<CourseInfo> Courses{ get; set; }
         public async Task OnGet()
         {
+   
             Classrooms = await _classroomService.GetClassrooms();
             Teachers = await _teacherService.GetTeachers();
             Subjects = await _subjectService.GetSubjects();

@@ -7,6 +7,7 @@ using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Login_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Microcontroller_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Subject_services;
@@ -53,26 +54,16 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<IIotHubService, IotHubService>();
             services.AddScoped<IMessage, ServiceBusService>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ILessonService, LessonService>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ICalendarService, CalendarService>();
             services.AddScoped<IMicrocontrollerService, MicrocontrollerService>();
             services.AddScoped<IMicrocontrollerRepository, MicrocontrollerRepository>();
-            GlobalConfiguration.Configuration
- .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
- .UseColouredConsoleLogProvider()
- .UseSimpleAssemblyNameTypeSerializer()
- .UseRecommendedSerializerSettings()
- .UseSqlServerStorage(Configuration.GetConnectionString("DBSQL"), new SqlServerStorageOptions
- {
-     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-     QueuePollInterval = TimeSpan.Zero,
-     UseRecommendedIsolationLevel = true,
-     UsePageLocksOnDequeue = true,
-     DisableGlobalLocks = true
- });
+            services.AddSession();
             services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBSQL"))); //questo permette di fare richieste
         }
 
@@ -92,7 +83,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

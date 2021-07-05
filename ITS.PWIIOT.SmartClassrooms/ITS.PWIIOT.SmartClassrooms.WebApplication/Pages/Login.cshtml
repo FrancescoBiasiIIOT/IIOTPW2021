@@ -1,6 +1,7 @@
 ﻿@page
 @model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.LoginModel
 @{
+    Layout = null;
 }
 
 
@@ -20,23 +21,30 @@
 <body>
     <div class="container">
         <div class="top">
-            <h1 id="title" class="hidden"><span id="logo">Daily <span>UI</span></span></h1>
+            <h1 id="title" class="hidden"><span id="logo">SMART <span>CLASSROOMS</span></span></h1>
         </div>
         <div class="login-box animated fadeInUp">
             <div class="box-header">
                 <h2>Log In</h2>
             </div>
-            <label for="username">Username</label>
-            <br />
-            <input type="text" id="username">
-            <br />
-            <label for="password">Password</label>
-            <br />
-            <input type="password" id="password">
-            <br />
-            <button type="submit">Sign In</button>
-            <br />
-            <a href="#"><p class="small">Forgot your password?</p></a>
+            <form method="POST">
+                <label for="username">Username</label>
+                <br />
+                <input type="text" asp-for="@Model.User.Username" id="username">
+                <br />
+                <label for="password">Password</label>
+                <br />
+                <input type="password" asp-for="@Model.User.Password" id="password">
+                <br />
+                <button type="submit">Sign In</button>
+                <br />
+            </form>
+            @if (!string.IsNullOrWhiteSpace(Model.Message))
+            {
+                <div role="alert" class="alert alert-success alert-dismissible mb-3">
+                    @Model.Message
+                </div>
+            }
         </div>
     </div>
 </body>

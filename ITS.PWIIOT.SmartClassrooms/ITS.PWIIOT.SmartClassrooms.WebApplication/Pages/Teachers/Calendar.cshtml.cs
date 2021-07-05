@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -21,6 +22,11 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Teachers
 
         public async Task OnGet(string teacherId)
         {
+            if (String.IsNullOrEmpty(HttpContext.Session.GetString("id")))
+            {
+                RedirectToPage("Login");
+            }
+
             Teacher = await _teacherService.GetTeacherById(new Guid(teacherId));
         }
     }

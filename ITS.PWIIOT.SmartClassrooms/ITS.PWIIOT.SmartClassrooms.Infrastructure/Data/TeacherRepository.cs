@@ -21,7 +21,6 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public async Task<IEnumerable<Teacher>> GetTeachers()
         {
             var teachers = await _smartClassesContext.Teachers
-                .Include(t => t.Teaches)
                 .ToListAsync();
 
             return teachers;
@@ -32,6 +31,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
             return await _smartClassesContext.
                 Teachers.Where(t => t.Id == id)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<Teacher> GetTeacherByEmaail(string email)
+        {
+            return await _smartClassesContext.
+    Teachers.Where(t => t.Email == email)
+    .FirstOrDefaultAsync();
         }
     }
 }
