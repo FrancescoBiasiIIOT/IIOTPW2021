@@ -24,14 +24,31 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks: true,
         resourceAreaHeaderContent: 'Edificio',
         resources: {
+
             url: resourcesUrl,
             method: 'GET',
             failure: function () {
             },
         },
+        resourceLabelDidMount: function (info) {
+            var questionMark = document.createElement('a');
+            questionMark.setAttribute('href', "yourlink.htm");
+            questionMark.innerText = '(Pianifica)';
+            var value = $(info.el).find('.fc-datagrid-cell-main')
+            value.prepend("a href='google.it'");
+        },
         slotLabelFormat: {
             hour: 'numeric',
             minute: '2-digit',
+        },
+        eventDidMount: function (info) {
+            $(info.el).find(".fc-datagrid-cell fc-resource").prepend("<span class='closeon test'>X</span>");
+            $(info.el).find(".closeon").click(function () {
+                fetch(url + '?lessonId=' + info.event.id, {
+                    method: 'DELETE',
+                })
+                info.event.remove();
+            });
         },
         events: {
             url: classroomUrl,

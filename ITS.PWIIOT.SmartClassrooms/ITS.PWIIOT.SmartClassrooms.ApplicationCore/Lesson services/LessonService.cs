@@ -44,7 +44,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             if(lessonInfo.Duration != null)
             {
                  var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-                 await SendMessageToDevice(lesson, device, MessageOperation.Add);
+              //   await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 
@@ -72,8 +72,8 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
 
         private async Task SendMessageToDevice(Lesson lesson, Microcontroller microcontroller, MessageOperation operation)
         {
-            var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);
-            await _iotHubService.SendMessageToDevice(JsonSerializer.Serialize(message), microcontroller.Gateway.GatewayId);
+        //    var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);
+         //   await _iotHubService.SendMessageToDevice(JsonSerializer.Serialize(message), microcontroller.Gateway.GatewayId);
         }
     }
 }
