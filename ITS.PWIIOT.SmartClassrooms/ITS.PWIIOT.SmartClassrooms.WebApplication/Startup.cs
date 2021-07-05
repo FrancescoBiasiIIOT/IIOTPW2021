@@ -43,7 +43,6 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddRazorPages();
             services.AddControllers();
             services.AddHostedService<ReceiverWorker>();
-            services.AddHostedService<SchedulerWorker>();
             services.AddScoped<IBuildingRepository, BuildingRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();

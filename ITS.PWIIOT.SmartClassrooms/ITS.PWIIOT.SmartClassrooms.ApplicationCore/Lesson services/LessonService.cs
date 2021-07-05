@@ -37,14 +37,14 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
         {
             var lesson = lessonInfo.ToLesson();
             lesson.Course = await _courseRepository.GetCourseById(lessonInfo.CourseId);
-            lesson.Classroom = await _classroomRepository.GetById(new Guid(lessonInfo.ClassroomId));
+            lesson.Classroom = await _classroomRepository.GetClassroomById(lessonInfo.ClassroomId);
             lesson.Subject = await _subjectRepository.GetSubjectById(lessonInfo.SubjectId);
             lesson.Teacher = await _teacherRepository.GetTeacherById(lessonInfo.TeacherId);
             await _lessonRepository.InsertLesson(lesson);
             if(lessonInfo.Duration != null)
             {
-                var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-              //  await SendMessageToDevice(lesson, device, MessageOperation.Add);
+                 var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+                 await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 

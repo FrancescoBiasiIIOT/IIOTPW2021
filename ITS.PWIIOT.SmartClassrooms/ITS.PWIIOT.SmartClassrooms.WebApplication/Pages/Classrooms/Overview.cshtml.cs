@@ -43,7 +43,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classrooms
         public async Task<IActionResult> OnPost()
         {
             Lesson.StartDate = DateTime.Now;
-            Lesson.EndDate = Lesson.StartDate.AddHours((double)Lesson.Duration);
+            Lesson.EndDate = Lesson.StartDate.AddMinutes((double)Lesson.Duration);
             await _lessonService.AddNewLesson(Lesson);
             return RedirectToPage();
 

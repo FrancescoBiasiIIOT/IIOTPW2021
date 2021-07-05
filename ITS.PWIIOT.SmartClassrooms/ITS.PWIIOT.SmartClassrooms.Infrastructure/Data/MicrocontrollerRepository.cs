@@ -22,11 +22,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         {
             var microcontrollers = await _smartClassesContext.Microcontrollers
                 .Include(g => g.Gateway)
+                .Include(g => g.Classroom)
+
                     .ThenInclude(b => b.Building)
                 .ToListAsync();
 
 
-            var microcontroller = microcontrollers.FirstOrDefault(m => m.DeviceId == id);
+            var microcontroller = microcontrollers.FirstOrDefault(m => m.Classroom.GetClassroomId() == id);
             return microcontroller;
 
 

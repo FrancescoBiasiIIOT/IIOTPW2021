@@ -116,7 +116,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
 
             return lessons;
         }
-    
+
 
         public async Task InsertLesson(Lesson lesson)
         {
