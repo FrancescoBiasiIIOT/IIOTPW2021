@@ -27,7 +27,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.WebApplication
-{
+{ 
     public class Startup
     {
         public Startup(IConfiguration configuration)
