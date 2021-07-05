@@ -30,8 +30,6 @@ namespace ITS.PWIIOT.SmartClassrooms.SchedulerWorker
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                  
-
                     services.AddHostedService<Worker>();
                     services.AddDbContext<SmartClassesContext>(options => options.UseSqlServer("Data Source=DESKTOP-LP5FFTL;Initial Catalog=SMARTCLASSROOMS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
                     services.AddScoped<ISubjectService, SubjectService>();
@@ -40,12 +38,13 @@ namespace ITS.PWIIOT.SmartClassrooms.SchedulerWorker
                     services.AddScoped<ITeacherRepository, TeacherRepository>();
                     services.AddScoped<ITeacherService, TeacherService>();
                     services.AddScoped<ISubjectRepository, SubjectRepository>();
-                    services.AddScoped<ILessonRepository, LessonRepository>();
                     services.AddScoped<ILessonService, LessonService>();
+                    services.AddScoped<ILessonRepository, LessonRepository>();
                     services.AddScoped<IMicrocontrollerService, MicrocontrollerService>();
                     services.AddScoped<IMicrocontrollerRepository, MicrocontrollerRepository>();
                     services.AddScoped<IIotHubService, IotHubService>();
+          
+                   
                 });
     }
-                
 }
