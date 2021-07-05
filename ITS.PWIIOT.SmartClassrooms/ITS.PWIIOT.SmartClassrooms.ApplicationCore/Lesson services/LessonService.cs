@@ -44,7 +44,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             if(lessonInfo.Duration != null)
             {
                  var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-              //   await SendMessageToDevice(lesson, device, MessageOperation.Add);
+                 await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 
@@ -65,15 +65,19 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             var lessons =  _lessonRepository.GetLessonsByStart(start);
             foreach (var lesson in lessons)
             {
-             //   var device = await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-            //    await SendMessageToDevice(lesson, device, MessageOperation.Add);
+              //   var device =  _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+             //    SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 
         private async Task SendMessageToDevice(Lesson lesson, Microcontroller microcontroller, MessageOperation operation)
         {
-        //    var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);
-         //   await _iotHubService.SendMessageToDevice(JsonSerializer.Serialize(message), microcontroller.Gateway.GatewayId);
+            if (microcontroller.Gateway.GatewayId == "TestDato")
+            {
+                var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);
+                await _iotHubService.SendMessageToDevice(JsonSerializer.Serialize(message), microcontroller.Gateway.GatewayId);
+            }
+               
         }
     }
 }

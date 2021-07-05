@@ -42,13 +42,20 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classroom
             Courses = await _courseService.GetCourses();
             Classroom = await _classroomService.GetClassroomById(classroomId);
         }
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(string classroomId)
         {
             if(ModelState.IsValid)
             {
                 await _lessonService.AddNewLesson(Lesson);
             }
+            ModelState.Clear();
 
+            Lesson = new();
+            Classroom = new();
+            Teachers = await _teacherService.GetTeachers();
+            Subjects = await _subjectService.GetSubjects();
+            Courses = await _courseService.GetCourses();
+            Classroom = await _classroomService.GetClassroomById(classroomId);
             return RedirectToPage();  
   
         }

@@ -45,6 +45,11 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Classrooms
             Lesson.StartDate = DateTime.Now;
             Lesson.EndDate = Lesson.StartDate.AddMinutes((double)Lesson.Duration);
             await _lessonService.AddNewLesson(Lesson);
+            ModelState.Clear();
+            Classrooms = await _classroomService.GetClassrooms();
+            Teachers = await _teacherService.GetTeachers();
+            Subjects = await _subjectService.GetSubjects();
+            Courses = await _courseService.GetCourses();
             return RedirectToPage();
 
         }

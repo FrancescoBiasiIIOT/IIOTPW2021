@@ -32,10 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         resourceLabelDidMount: function (info) {
             var questionMark = document.createElement('a');
-            questionMark.setAttribute('href', "yourlink.htm");
-            questionMark.innerText = '(Pianifica)';
+            questionMark.style.color = 'inherit'
             var value = $(info.el).find('.fc-datagrid-cell-main')
-            value.prepend("a href='google.it'");
+            questionMark.setAttribute('href', "http://localhost:7608/Classrooms/Calendar/" + value.text());
+            questionMark.innerText = value.text();
+            if (value.text().indexOf('EDIFICIO') == -1) {
+                value.text('')
+                value.append(questionMark);
+            }
         },
         slotLabelFormat: {
             hour: 'numeric',
