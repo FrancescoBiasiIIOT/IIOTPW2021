@@ -11,7 +11,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
         public int MicrocontrollerId { get; set; }
         public string Teacher { get; set; }
         public string Subject { get; set; }
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
         public MessageOperation Operation { get; set; }
 
         public DeviceMessage()

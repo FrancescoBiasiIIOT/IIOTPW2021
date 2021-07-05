@@ -18,7 +18,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         {
             return new DeviceMessage
             {
-                Duration = lesson.GetDuration(),
+                Duration = lesson.GetDuration().Minutes,
                 MicrocontrollerId = microcontrollerId,
                 Operation = messageOperation,
                 Subject = lesson.Subject.Name,

@@ -40,7 +40,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
                     switch (user.Role)
                     {
                         case Roles.Administrator:
-                        return RedirectToPage("/Index");
+                        return RedirectToPage("/Classrooms/Overview");
 
                         case Roles.Teacher:
                             HttpContext.Session.SetString("id",user.TeacherId.ToString());
