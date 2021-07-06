@@ -9,16 +9,54 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/fontawesome/css/all.css" rel='stylesheet' />
     <link href="~/fullcalendar/main.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
     <link href="~/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <body>
+
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
+                <div class="custom-menu">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                </div>
+                <h1><a href="index.html" class="logo">Smart Classrooms</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#"><span class="fa fa-home mr-3"></span> Overview</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-user mr-3"></span> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Friends</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Subcription</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Settings</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Information</a>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <!-- Page Content  -->
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+            </div>
+    </body>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -32,7 +70,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="js/popper.min.js"></script>
+    <script src="js/layout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

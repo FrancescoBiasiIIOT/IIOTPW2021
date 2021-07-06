@@ -24,7 +24,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Course
         {
 
             if (String.IsNullOrEmpty(HttpContext.Session.GetString("id"))){
-                RedirectToPage("Login");
+                RedirectToPage("Index");
             }
 
             Course = await courseService.GetCourseById(new Guid(courseId));

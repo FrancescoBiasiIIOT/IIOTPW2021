@@ -27,7 +27,8 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 
         public TimeSpan GetDuration()
         {
-            return EndDate.Subtract(StartDate);
+            var test =  EndDate.Subtract(StartDate);
+            return test;
         }
     }
 

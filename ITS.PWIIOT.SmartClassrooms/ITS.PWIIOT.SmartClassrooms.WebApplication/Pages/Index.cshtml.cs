@@ -1,7 +1,9 @@
 ﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.Domain;
+using ITS.PWIIOT.SmartClassrooms.DTO;
 using ITS.PWIIOT.SmartClassrooms.Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -15,26 +17,55 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<Domain.Classroom> Classrooms { get; set; }
-        private readonly IClassroomRepository classroomRepository;
-        public IEnumerable<Domain.Course> Courses { get; set; }
-        public IEnumerable<Domain.Teacher> Teachers { get; set; }
-        private readonly ICourseRepository _courseRepository;
-        private readonly ICalendarService calendarService;
-        private readonly ITeacherRepository teacherRepository;
-        public IndexModel(ILogger<IndexModel> logger, IClassroomRepository classroomRepository, ICourseRepository courseRepository, ITeacherRepository teacherRepository, ICalendarService calendarService)
+        private readonly ILoginService _loginService;
+        [TempData]
+        public string Message { get; set; }
+        [BindProperty]
+        public UserInfo User { get; set; }
+
+        public IndexModel(ILoginService loginService)
         {
-            this.classroomRepository = classroomRepository;
-            _courseRepository = courseRepository;
-            this.teacherRepository = teacherRepository;
-            this.calendarService = calendarService;
+            _loginService = loginService;
         }
 
-        public async Task OnGet()
+        public void OnGet()
         {
-            Courses = await _courseRepository.GetCourses();
-            Classrooms = await classroomRepository.GetClassrooms();
-            Teachers = await teacherRepository.GetTeachers();
+
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _loginService.GetUser(User);
+                if (user.IsCorrect)
+                {
+                    HttpContext.Session.SetInt32("role", (int)user.Role);
+
+                    switch (user.Role)
+                    {
+                        case DTO.Roles.Administrator:
+                            return RedirectToPage("/Classrooms/Overview");
+
+                        case DTO.Roles.Teacher:
+                            HttpContext.Session.SetString("id", user.TeacherId.ToString());
+                            return RedirectToPage("/Teachers/Calendar", new { teacherId = user.TeacherId.ToString() });
+
+                        case DTO.Roles.Studente:
+                            HttpContext.Session.SetString("id", user.CourseId.ToString());
+                            return RedirectToPage("Courses/Calendar", new { courseId = user.CourseId.ToString() });
+                    }
+
+                    return RedirectToPage("/Index");
+                }
+                else
+                {
+                    Message = "Login Errato";
+                }
+            }
+
+            ModelState.Clear();
+            return RedirectToPage();
         }
     }
 }

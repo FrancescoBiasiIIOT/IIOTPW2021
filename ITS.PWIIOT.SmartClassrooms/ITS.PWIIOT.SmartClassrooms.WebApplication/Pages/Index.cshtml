@@ -1,37 +1,69 @@
 ﻿@page
-@model IndexModel
+@model ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    Layout = null;
 }
 
-<h1>OVERWIEW</h1> <a class="btn btn-primary" asp-page="/classrooms/overview">Overview</a>
-<h1>AULE</h1>
-<div class="card-group d-flex flex-wrap">
-    @foreach (var item in Model.Classrooms)
-    {
-        <div class="card mr-3" style="width: 18rem;">
-            <div class="card-body">
-                <a class="card-title" asp-page="/classrooms/calendar" asp-route-classroomId=@item.GetClassroomId()>@item.GetClassroomId()</a>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-            </ul>
+
+<head>
+    <meta charset="utf-8">
+    <title>SMART CLASSROOMS</title>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="~/css/loginstyle.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1 id="title" class="hidden"><span id="logo">SMART <span>CLASSROOMS</span></span></h1>
         </div>
-    }
-</div>
+        <div class="login-box animated fadeInUp">
+            <div class="box-header">
+                <h2>Log In</h2>
+            </div>
+            <form method="POST">
+                <label for="username">Username</label>
+                <br />
+                <input type="text" asp-for="@Model.User.Username" id="username">
+                <br />
+                <label for="password">Password</label>
+                <br />
+                <input type="password" asp-for="@Model.User.Password" id="password">
+                <br />
+                <button type="submit">Sign In</button>
+                <br />
+            </form>
+            @if (!string.IsNullOrWhiteSpace(Model.Message))
+            {
+                <div role="alert" class="alert alert-success alert-dismissible mb-3">
+                    @Model.Message
+                </div>
+            }
+        </div>
+    </div>
+</body>
 
-<h1>CORSI</h1>
-@foreach (var item in Model.Courses)
-{
-    <a class="btn btn-primary" asp-page="/courses/calendar" asp-route-courseId=@item.Id>@item.Name</a>
-}
-<hr />
-
-<h1>Docenti</h1>
-@foreach (var item in Model.Teachers)
-{
-    <a class="btn btn-primary" asp-page="/teachers/calendar" asp-route-teacherId=@item.Id>@item.Name</a>
-}
-<hr />
-
-
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
