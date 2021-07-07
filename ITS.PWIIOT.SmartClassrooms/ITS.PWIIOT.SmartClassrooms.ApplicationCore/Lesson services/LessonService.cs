@@ -60,13 +60,13 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
             return lesson.ToLessonInfo();
         }
 
-        public  void SendLessonBetweenRange(DateTime start, DateTime end)
+        public  async Task SendLessonBetweenRange(DateTime start)
         {
-            var lessons =  _lessonRepository.GetLessonsByStart(start);
+            var lessons = await  _lessonRepository.GetLessonsByStart(start);
             foreach (var lesson in lessons)
             {
-              //   var device =  _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
-             //    SendMessageToDevice(lesson, device, MessageOperation.Add);
+                  var device =  await _microcontrollerRepository.GetDeviceByClassroomId(lesson.Classroom.GetClassroomId());
+                  await SendMessageToDevice(lesson, device, MessageOperation.Add);
             }
         }
 

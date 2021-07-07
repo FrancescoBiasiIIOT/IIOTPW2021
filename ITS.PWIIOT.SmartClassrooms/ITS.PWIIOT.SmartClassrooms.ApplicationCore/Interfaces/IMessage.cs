@@ -9,7 +9,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
 {
     public interface IMessage
     {
-        Task StartReceiveMessagesFromSubscriptionAsync(Action<DeviceMessage> action, string subscriptionName);
+        Task StartReceiveMessagesFromSubscriptionAsync(Action<EmailMessage> action, string subscriptionName);
         Task StopReceiveMessagesFromSubscriptionAsync();
     }
 }

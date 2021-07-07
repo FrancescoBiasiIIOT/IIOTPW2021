@@ -26,7 +26,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services
             _topicName = configuration.GetConnectionString("TopicName");
             client = new ServiceBusClient(_connectionString);
         }
-        public async Task StartReceiveMessagesFromSubscriptionAsync(Action<DeviceMessage> processMessageFunc, string subscriptionName)
+        public async Task StartReceiveMessagesFromSubscriptionAsync(Action<EmailMessage> processMessageFunc, string subscriptionName)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services
                 processor.ProcessMessageAsync += async args =>
                 {
                     string body = args.Message.Body.ToString();
-                    var message = JsonSerializer.Deserialize<DeviceMessage>(body);
+                    var message = JsonSerializer.Deserialize<EmailMessage>(body);
                     processMessageFunc.Invoke(message);
                     await args.CompleteMessageAsync(args.Message);
                 };

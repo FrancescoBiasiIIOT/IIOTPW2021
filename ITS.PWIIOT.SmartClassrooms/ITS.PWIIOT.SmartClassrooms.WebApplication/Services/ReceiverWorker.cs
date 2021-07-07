@@ -1,4 +1,5 @@
 ﻿using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,9 +15,11 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
     {
 
         public IServiceScopeFactory _serviceScopeFactory { get; set; }
-        public ReceiverWorker(IServiceScopeFactory serviceScopeFactory)
+        public IEmailService EmailService { get; set; }
+        public ReceiverWorker(IServiceScopeFactory serviceScopeFactory, IEmailService emailService)
         {
             _serviceScopeFactory = serviceScopeFactory;
+            EmailService = emailService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -24,12 +27,13 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var message = scope.ServiceProvider.GetRequiredService<IMessage>();
+                EmailService.SendEmail(new Domain.EmailMessage());
                 await message.StartReceiveMessagesFromSubscriptionAsync(
                 message =>
                 {
-                   
-                }, "storage");
-                // now do your work
+                    
+                    EmailService.SendEmail(message);
+                }, "receiver");
             }
         }
 

@@ -3,6 +3,7 @@ using Hangfire.SqlServer;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Calendar_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Classroom_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Course_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
@@ -54,6 +55,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<IIotHubService, IotHubService>();
             services.AddScoped<IMessage, ServiceBusService>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ICourseService, CourseService>();

@@ -26,7 +26,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services
             {
                 var message = new MimeMessage();
                 var emailSender = "francesco.biasi@stud.tecnicosuperiorekennedy.it";
-
+        
                 var host = "smtp.gmail.com";
                 var port = 25;
                 var emailReceiver = "biasifrancesco3gmail.com";
@@ -57,4 +57,4 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services
 
         }
     }
-}}
+}

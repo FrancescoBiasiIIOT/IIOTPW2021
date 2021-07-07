@@ -24,5 +24,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Controllers
             var lesson = await _lessonService.GetLessonById(new Guid(id));
             return Ok(lesson);
         }
+
     }
 }
+
