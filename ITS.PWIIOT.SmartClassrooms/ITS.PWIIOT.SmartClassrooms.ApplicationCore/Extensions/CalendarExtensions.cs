@@ -20,7 +20,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
         }
         public static IEnumerable<CalendarChildResource> ToCalendarResources(this IEnumerable<Classroom> buildings)
         {
-            return buildings.Select(b => b.ToCalendarResource()).OrderBy(c => c.Title); ;
+            return buildings.OrderBy(c => c.Name).Select(b => b.ToCalendarResource());
         }
 
         public static CalendarEvent ToCalendarEvent(this Lesson lesson)
@@ -34,6 +34,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Extensions
                 AllDay = false,
                 Title =
                 $"{lesson.Teacher.GetFullName()}, " +
+                $"{lesson.Classroom.GetClassroomId()}, " +
                 $"{lesson.Subject.Name}, " +
                 $"{lesson.Course.Name} ",
 

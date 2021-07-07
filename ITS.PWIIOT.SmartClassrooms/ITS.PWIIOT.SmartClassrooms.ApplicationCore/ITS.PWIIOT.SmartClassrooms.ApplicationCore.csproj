@@ -6,18 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.1.2" />
+    <PackageReference Include="MailKit" Version="2.13.0" />
     <PackageReference Include="Microsoft.Azure.Devices" Version="1.34.0" />
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.37.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="MimeKit" Version="2.13.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.Domain\ITS.PWIIOT.SmartClassrooms.Domain.csproj" />
     <ProjectReference Include="..\ITS.PWIIOT.SmartClassrooms.DTO\ITS.PWIIOT.SmartClassrooms.DTO.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Email services\" />
   </ItemGroup>
 
 </Project>

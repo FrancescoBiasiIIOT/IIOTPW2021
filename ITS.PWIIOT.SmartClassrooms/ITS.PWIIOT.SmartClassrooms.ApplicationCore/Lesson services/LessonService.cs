@@ -72,7 +72,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services
 
         private async Task SendMessageToDevice(Lesson lesson, Microcontroller microcontroller, MessageOperation operation)
         {
-            if (microcontroller.Gateway.GatewayId == "TestDato")
+            if ( microcontroller != null && microcontroller.Gateway.GatewayId == "TestDato")
             {
                 var message = lesson.ToDeviceMessage(microcontroller.DeviceId, operation);
                 await _iotHubService.SendMessageToDevice(JsonSerializer.Serialize(message), microcontroller.Gateway.GatewayId);
