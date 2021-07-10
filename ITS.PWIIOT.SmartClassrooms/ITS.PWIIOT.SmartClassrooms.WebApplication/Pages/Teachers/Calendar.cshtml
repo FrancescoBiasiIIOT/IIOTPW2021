@@ -10,10 +10,45 @@
 <link href="~/fullcalendar/main.css" rel="stylesheet" />
 <link href="~/fontawesome/css/all.css" rel="stylesheet" />
 
-<input type="text"  class="text-center" id="teacherId" value="@Model.Teacher.Id" hidden />
+<input type="text" class="text-center" id="teacherId" value="@Model.Teacher.Id" hidden />
 <h1 class="mb-2 text-center">@Model.Teacher.FullName</h1>
 <div class="ml-2 mr-2">
     <div class="mt-3" id='calendar'></div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Richiedi Supporto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="course" class="form-label">Seleziona la classe</label>
+                            <select  class="custom-select form-select-sm mb-3">
+                                <option selected>Classe</option>
+                                @foreach (var course in Model.Classrooms)
+                                {
+                                    <option value=@course.Id>@course.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Richiedi</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 

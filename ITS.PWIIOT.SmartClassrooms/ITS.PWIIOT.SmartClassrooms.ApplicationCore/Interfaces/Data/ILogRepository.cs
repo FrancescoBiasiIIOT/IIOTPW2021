@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data
 {
-    public interface IMicrocontrollerRepository
+    public interface ILogRepository
     {
-        Task<Microcontroller> GetDeviceByClassroomId(string id);
-       Microcontroller GetDeviceById(int id);
+        void Insert(Log log);
     }
 }

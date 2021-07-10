@@ -14,10 +14,13 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Teachers
     {
         public TeacherInfo Teacher { get; set; }
         private readonly ITeacherService _teacherService;
+        private readonly IClassroomService classroomService;
+        public IEnumerable<ClassroomInfo> Classrooms { get; set; }
 
-        public CalendarModel(ITeacherService teacherService)
+        public CalendarModel(ITeacherService teacherService, IClassroomService classroomService)
         {
             _teacherService = teacherService;
+            this.classroomService = classroomService;
         }
 
         public async Task OnGet(string teacherId)
@@ -27,6 +30,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Pages.Teachers
                 RedirectToPage("Index");
             }
 
+            Classrooms = await classroomService.GetClassrooms();
             Teacher = await _teacherService.GetTeacherById(new Guid(teacherId));
         }
     }

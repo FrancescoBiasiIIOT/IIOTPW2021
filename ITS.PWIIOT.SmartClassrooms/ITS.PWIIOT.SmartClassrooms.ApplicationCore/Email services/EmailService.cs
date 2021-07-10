@@ -24,19 +24,11 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services
         {
             try
             {
-                var message = new MimeMessage();
-                var emailSender = "francesco.biasi@stud.tecnicosuperiorekennedy.it";
-        
-                var host = "smtp.gmail.com";
-                var port = 25;
-                var emailReceiver = "biasifrancesco3gmail.com";
-                message.From.Add(new MailboxAddress("Francesco", emailSender));
-                message.To.Add(new MailboxAddress("Francesco Biasi", emailReceiver));
-                message.Subject = "Richiesta";
+          
 
                 message.Body = new TextPart("plain")
                 {
-                    Text = $"Ciao Antonio, sei richiesto nell'aula: {activity.Classroom} \n Docente: {activity.Teacher}"
+                    Text = $"Ciao Antonio, sei richiesto nell'aula: {activity.Classroom}\n"
                 };
                 using (var client = new SmtpClient())
                 {
@@ -49,7 +41,7 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services
                 }
                 return true;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
 
                 return false;

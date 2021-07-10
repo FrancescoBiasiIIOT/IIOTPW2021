@@ -36,8 +36,8 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
         public async Task<Teacher> GetTeacherByEmaail(string email)
         {
             return await _smartClassesContext.
-    Teachers.Where(t => t.Email == email)
-    .FirstOrDefaultAsync();
+            Teachers.Where(t => t.Email == email)
+                .FirstOrDefaultAsync();
         }
     }
 }

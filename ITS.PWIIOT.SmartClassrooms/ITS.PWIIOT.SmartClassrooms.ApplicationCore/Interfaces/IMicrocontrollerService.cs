@@ -10,5 +10,6 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces
     public interface IMicrocontrollerService
     {
         Task<MicrocontrollerInfo> GetMicrocontrollerInfo(string classroomId);
+        MicrocontrollerInfo GetMicrocontrollerById(int  picId);
     }
 }

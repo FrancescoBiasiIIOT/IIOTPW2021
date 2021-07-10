@@ -8,6 +8,7 @@ using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Interfaces.Data;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.IOT_Hub_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Lesson_services;
+using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Log_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Login_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Microcontroller_services;
 using ITS.PWIIOT.SmartClassrooms.ApplicationCore.Service_Bus_Services;
@@ -53,7 +54,7 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<IIotHubService, IotHubService>();
-            services.AddScoped<IMessage, ServiceBusService>();
+            services.AddTransient<IMessage, ServiceBusService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<ILoginRepository, LoginRepository>();
@@ -61,6 +62,8 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ILessonService, LessonService>();
+            services.AddScoped<ILogService, LogService>();
+            services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ICalendarService, CalendarService>();
             services.AddScoped<IMicrocontrollerService, MicrocontrollerService>();

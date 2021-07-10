@@ -19,6 +19,12 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Microcontroller_services
             _microcontrollerRepository = microcontrollerRepository;
         }
 
+        public MicrocontrollerInfo GetMicrocontrollerById(int picId)
+        {
+            var microcontrller = _microcontrollerRepository.GetDeviceById(picId);
+            return microcontrller.ToMicrocontrollerInfo();
+        }
+
         public async Task<MicrocontrollerInfo> GetMicrocontrollerInfo(string classroomId)
         {
             var microcontroller = await _microcontrollerRepository.GetDeviceByClassroomId(classroomId);

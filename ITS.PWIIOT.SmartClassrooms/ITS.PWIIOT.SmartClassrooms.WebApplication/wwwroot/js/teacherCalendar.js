@@ -15,14 +15,21 @@ function BuildCalendar(calendarEl, params, url) {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         initialView: 'timeGridDay',
         headerToolbar: {
-
-            left: 'prev,next,today',
+            left: 'prev,next,today,myCustomButton',
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
             center: 'title',
         },
         slotLabelFormat: {
             hour: 'numeric',
             minute: '2-digit',
+        },
+        customButtons: {
+            myCustomButton: {
+                text: 'Richiedi supporto',
+                click: function () {
+                    $('#addEventModal').modal('show');
+                }
+            }
         },
         navLinks: true,
         locale: 'it',

@@ -34,5 +34,13 @@ namespace ITS.PWIIOT.SmartClassrooms.Infrastructure.Data
 
 
         }
+
+        public Microcontroller GetDeviceById(int id)
+        {
+            var microcontroller =  _smartClassesContext.Microcontrollers
+   .Include(g => g.Classroom).FirstOrDefault(m => m.DeviceId== id);
+            return microcontroller;
+
+        }
     }
 }

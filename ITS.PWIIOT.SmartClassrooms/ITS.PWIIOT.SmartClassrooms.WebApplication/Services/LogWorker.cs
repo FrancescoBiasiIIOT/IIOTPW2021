@@ -11,16 +11,14 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
 {
-    public class ReceiverWorker : BackgroundService
+    public class LogWorker : BackgroundService
     {
 
         public IServiceScopeFactory _serviceScopeFactory { get; set; }
         public IMessage Message { get; set; }
-        public IEmailService EmailService { get; set; }
-        public ReceiverWorker(IServiceScopeFactory serviceScopeFactory, IEmailService emailService, IMessage message)
+        public LogWorker(IServiceScopeFactory serviceScopeFactory, IMessage message)
         {
             _serviceScopeFactory = serviceScopeFactory;
-            EmailService = emailService;
             Message = message;
         }
 
@@ -28,21 +26,18 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var classroomService = scope.ServiceProvider.GetRequiredService<IClassroomService>();
-                var microcontroller = scope.ServiceProvider.GetRequiredService<IMicrocontrollerService>();
-                EmailService.SendEmail(new Domain.EmailMessage { Classroom = "S1" });
+                var logservice = scope.ServiceProvider.GetRequiredService<ILogService>();
                 await Message.StartReceiveMessagesFromSubscriptionAsync(
                 message =>
                 {
-                    if(message.Operation == Domain.OperationMessage.AdministratorRequest)
+                    if(message.Operation == Domain.OperationMessage.Log)
                     {
-                        var classroom = microcontroller.GetMicrocontrollerById(message.PicId).ClassroomId;
-                        EmailService.SendEmail(new Domain.EmailMessage { Classroom = classroom });
+                        logservice.Insert(message.Message);
                     }
-                }, "email");
+                }, "log");
             }
 
         }
 
     }
-} 
+}

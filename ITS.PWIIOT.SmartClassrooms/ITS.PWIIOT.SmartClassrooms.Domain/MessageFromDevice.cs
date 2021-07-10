@@ -9,12 +9,14 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
     public class MessageFromDevice
     {
         public OperationMessage Operation { get; set; }
-        public int Data { get; set; }
+        public int PicId { get; set; }
+        public string Message { get; set; }
 
     }
 
     public enum OperationMessage
     {
         AdministratorRequest = 0,
+        Log = 10
     }
 }
