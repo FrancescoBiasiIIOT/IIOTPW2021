@@ -4,7 +4,9 @@ const SerialPort = require('serialport')
 const DeviceId = 100;
 const port = new SerialPort('COM9', {
   baudRate: 9600
-})
+})     
+
+
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var Parser = require("binary-parser").Parser;
@@ -27,7 +29,7 @@ client.on('message', function (msg) {
     buffer[0] = message.Duration;
     port.write(buffer); 
     port.write('\r');
-
+ 
     console.log(message)
     client.complete(msg, function (err) {
       if (err) {
@@ -48,12 +50,20 @@ client.on('message', function (msg) {
     .uint8("mittente")
     .uint8("payload")
     var message = header.parse(data);
-    console.log(message)
     var messageToSend = {
-      MicrocontrollerId : message.mittente,
+      PicId : message.mittente,
       Operation : message.operazione
     };
     console.log(messageToSend);
+    client.sendEvent(new Message(JSON.stringify(messageToSend)));
+     
+  })   
+        
+
+  port.on('error', function(err) {
+    var message = {
+      Operation : 10,
+      Message : err.message
+    }
     client.sendEvent(new Message(JSON.stringify(message)));
-    
   })
