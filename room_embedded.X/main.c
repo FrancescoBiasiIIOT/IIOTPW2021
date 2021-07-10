@@ -1,4 +1,6 @@
 #define PinguinoID 0x0B
+#define GatewayID 0x64
+#define PinguinoName "L10\n"
 
 // DEVCFG3
 #pragma config USERID = 0xFFFF          // Enter Hexadecimal value (Enter Hexadecimal value)
@@ -39,30 +41,109 @@
 char protocolStep = 0;
 char readID = 0;
 char msgType = 0;
-char msgContent[33];
-char notForMe = 0;
-char i = 0, j;
-const char msgLength[] = {33,1,1,3};
+unsigned char msgContent[35];
+char notForMe = 0; //CALL AN AMBULANCE!!
+int i = 0, j;
 char uartJobNow = 0;
+char processMsgFlag = 0;
 
 ////Variabili gestione display////
-int timeLeft = 0; //Secondi rimanenti alla fine della lezione
+unsigned char timeLeftNum = 0; //Secondi rimanenti alla fine della lezione
+unsigned char timeLeftStr[4];
+char tmr3Count = 0;
+char updateTimeFlag = 0;
+
+////Variabili pulsante////
+char btn, btn_old;
+int n;
 
 void initUART(void);
+void processMsg();
+void checkBtn();
 
 int main(void)
 {
-    initUART();
+    AD1PCFG = 0xFFFF;
+    TRISBbits.TRISB1 = 1;
+    OSCCONbits.PBDIV = 0;
+    
     initLcd();
-    printString("Elezioni Roma");
-    goToRow(4);
-    printString("Vota Calenda");
+    initUART();
+    initClassTimer();
+    
+    printString("AULA LIBERA\n");
+    
     while(1){
-        /*
-        updateTimeLeft();
-        
-        */
+        if(processMsgFlag){
+            processMsgFlag = 0;
+            processMsg();
+        }
+        if(updateTimeFlag){
+            updateTime();
+        }
+        checkBtn();
     }
+}
+
+void updateTime() {
+    if (timeLeftNum <= 1) {
+        T3CONbits.TON = 0;
+        TMR3 = 0;
+        updateTimeFlag = 0;
+        tmr3Count = 0;
+        clearLcd();
+        goToRow(1);
+        printString("AULA LIBERA\n");
+    } else {
+        updateTimeFlag = 0;
+        tmr3Count = 0;
+        timeLeftNum--;
+        convertDuration();
+        goToRow(1);
+        goToRow(4);
+        printString(timeLeftStr);
+        printString("m rimanenti  \n");
+    }
+    
+    return;
+}
+
+void convertDuration() {
+    if (timeLeftNum > 99) {
+        timeLeftStr[0] = timeLeftNum / 100 + 48;
+        timeLeftStr[1] = timeLeftNum / 10 % 10 + 48;
+        timeLeftStr[2] = timeLeftNum % 10 + 48;
+        timeLeftStr[3] = '\n';
+    } else if (timeLeftNum > 9) {
+        timeLeftStr[0] = timeLeftNum / 10 % 10 + 48;
+        timeLeftStr[1] = timeLeftNum % 10 + 48;
+        timeLeftStr[2] = '\n';
+    } else {
+        timeLeftStr[0] = timeLeftNum % 10 + 48;
+        timeLeftStr[1] = '\n';
+    }
+    
+    return;
+}
+
+void checkBtn() {
+    btn = PORTBbits.RB1;
+    if ((btn == 1) && (btn_old == 0)) {
+        for (n = 0; n < 5000; n++);
+        btn = PORTBbits.RB1;
+        if ((btn == 1) && (btn_old == 0)) {
+            while (uartJobNow != 0) {}
+            uartJobNow = 1; //Sto inviando
+            //Vedere protocollo - pulsante premuto
+            U1TXREG = GatewayID; // Id destinatario
+            U1TXREG = 0x02;
+            U1TXREG = PinguinoID;
+            U1TXREG = 0x0D;
+            uartJobNow = 0; //Ho smesso di inviare
+        }
+    }
+
+    btn_old = btn;
 }
 
 void initUART(){
@@ -74,7 +155,8 @@ void initUART(){
     U1STAbits.UTXEN = 1;
     
     //UART reception config
-    IPC6bits.U1IP = 2;
+    IPC6bits.U1IP = 7;
+    IPC6bits.U1IS = 3;
     IFS0bits.U1RXIF = 0;
     U1STAbits.URXISEL = 0;
     IEC0bits.U1RXIE = 1;
@@ -93,14 +175,50 @@ void resetProtocolSteps(){
 }
 
 void fillDisplay(){
+    clearLcd();
+    int i, j;
+    char teacher[17] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+         topic[17] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
+    //Estrazione nome insegnante
+    for(i=0; i<17; i++){
+        teacher[i] = msgContent[i];
+        if(msgContent[i] == '\n')
+            break;
+    }
+
+    //Estrazione nome del corso
+    for(j=i+1; j<i+18; j++){
+        topic[j-(i+1)] = msgContent[j];
+        if(msgContent[j] == '\n')
+            break;
+    }
+    
+    //Estrazione durata della lezione (minuti)
+    timeLeftNum = msgContent[j+1];
+    convertDuration(); //Sposta valore dalla globale timeLeftNum (char) alla globale timeLeftStr (array di char)
+    
+    goToRow(1);
+    printString(PinguinoName);
+    goToRow(2);
+    printString(teacher);
+    goToRow(3);
+    printString(topic);
+    goToRow(4);
+    printString( timeLeftStr );
+    printString("m rimanenti\n");
+    
+    //Avvia timer
+    TMR3 = 0;
+    tmr3Count = 0;
+    T3CONbits.TON = 1;
 }
 
 void processMsg(){
     resetProtocolSteps();
     
     switch(msgType){
-        case 0:
+        case 0: fillDisplay();
                 break;
         case 1:
                 break;
@@ -110,6 +228,22 @@ void processMsg(){
                 break;
         default: break;
     }
+}
+
+void initClassTimer(){
+    T3CONbits.TON = 0;
+    T3CONbits.TCKPS = 7; //Prescaler
+    PR3 = 2000;
+    TMR3 = 0;
+
+    IPC3bits.T3IP = 7;
+    IPC3bits.T3IS = 2;
+    IFS0bits.T3IF = 0;
+    IEC0bits.T3IE = 1;
+
+    INTCONSET = _INTCON_MVEC_MASK;  
+
+    __builtin_enable_interrupts(); //Interruttore generale di tutti gli interrupt
 }
 
 void processPackage(){
@@ -136,27 +270,47 @@ void processPackage(){
         }
         protocolStep++; 
         
-        if( i >= msgLength[msgType] ){
-            //La variabile 'i' conta quanti pacchetti del body ho letto (viene incrementata a ogni 'default' dello switch sopra).
+        if( a == '\r' ){
+            while(a=='\r')
+                a = U1RXREG;
             //Se questa condizione è vera, vuol dire che ho ricevuto l'ultimo pacchetto.
             uartJobNow = 0; //Segnalo che ho smesso di ricevere
             if(notForMe)
                 resetProtocolSteps();
-            else
-                processMsg();
+            else{
+                processMsgFlag = 1;
+            }
         }
         
         IFS0bits.U1RXIF = 0;
     }
 }
 
-void __ISR(_UART_1_VECTOR, IPL2AUTO) U1RXInterrupt(void){
-    if(uartJobNow == 0 || uartJobNow == 2)
+void __ISR(_UART_1_VECTOR, IPL7SRS) U1RXInterrupt(void){
+    if(uartJobNow == 0 || uartJobNow == 2){
         //Pacchetto esterno
         processPackage();
-    else
+    }
+    else{
         //Pacchetto inviato da questa stessa scheda, da controllare
-        if(U1RXREG != U1TXREG)
+        //if(U1RXREG != U1TXREG)
             //Collisione!!
-            return;
+            //return;
+    }
+    IFS0bits.U1RXIF = 0;
+}
+
+void classTimerInterrupt(){ //Decimi di millisecondo
+    if(tmr3Count < 10)
+        tmr3Count++;
+    else{ //È passato un minuto
+        updateTimeFlag = 1;
+    }
+    
+    return;
+}
+
+void __ISR(_TIMER_3_VECTOR, IPL7SRS) T3Interrupt(void){
+    classTimerInterrupt();
+    IFS0bits.T3IF = 0;
 }

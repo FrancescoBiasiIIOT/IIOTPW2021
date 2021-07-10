@@ -16,7 +16,7 @@
 #define GoToRow3_CMD 0x90
 #define GoToRow4_CMD 0xD0
 
-char go = 0;
+char goTmrLcd = 0;
 
 void initLcd(){
     TRISD = 0x00;
@@ -26,10 +26,7 @@ void initLcd(){
     initLcdTimer();
     
     //Reset lcd circuit
-    //TRISGbits.TRISG6 = 0;
-    //PORTGbits.RG6 = 0;
-    
-    sleep(500);
+    sleepLcd(500);
     
     //Imposto 4 bit
     sendConfigSinglePulse(FunctionSet8Bit_CMD>>4);
@@ -66,9 +63,9 @@ void sendCommand(char rs, char rw, char db7, char db6, char db5, char db4){
     PORTDbits.RD11 = db4;
     pulseE();
     if(rs == 1)
-        sleep(1);
+        sleepLcd(1);
     else
-        sleep(50);
+        sleepLcd(50);
     
     return;
 }
@@ -101,19 +98,24 @@ void goToRow(char n){
     }
 }
 
+void clearLcd(){
+    sendConfig(Clear_CMD);
+}
+
 void printString(char *str){
-    while (*str) {
-        sendLetter(str[0]);
-        *str++;
+    char i = 0;
+    while (str[i] != '\n') {
+        sendLetter(str[i]);
+        i++;
     }
 }
 
 void pulseE(){
-    sleep(10);
+    sleepLcd(10);
     PORTBbits.RB14 = 0;
-    sleep(10);
+    sleepLcd(10);
     PORTBbits.RB14 = 1;
-    sleep(10);
+    sleepLcd(10);
     PORTBbits.RB14 = 0;
     
     return;
@@ -122,10 +124,11 @@ void pulseE(){
 void initLcdTimer(){
     T2CONbits.TON = 0;
     T2CONbits.TCKPS = 1; //Prescaler
-    PR2 = 2000;
+    PR2 = 500;
     TMR2 = 0;
 
     IPC2bits.T2IP = 7;
+    IPC2bits.T2IS = 1;
     IFS0bits.T2IF = 0;
     IEC0bits.T2IE = 1;
 
@@ -134,19 +137,19 @@ void initLcdTimer(){
     __builtin_enable_interrupts(); //Interruttore generale di tutti gli interrupt
 }
 
-void sleep(int dms){ //Decimi di millisecondo
+void sleepLcd(int dms){ //Decimi di millisecondo
     TMR2 = 0;
     T2CONbits.TON = 1;
     int count = 0;
     while(count < dms)
-        if(go){
+        if(goTmrLcd){
             count++;
-            go = 0;
+            goTmrLcd = 0;
         }
     T2CONbits.TON = 0;
 }
 
 void __ISR(_TIMER_2_VECTOR, IPL7SRS) T2Interrupt(void){
-    go = 1;
+    goTmrLcd = 1;
     IFS0bits.T2IF = 0;
 }
