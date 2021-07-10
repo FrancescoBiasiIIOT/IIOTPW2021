@@ -26,21 +26,21 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using (var scope = _serviceScopeFactory.CreateScope())
-            {
-                var classroomService = scope.ServiceProvider.GetRequiredService<IClassroomService>();
-                var microcontroller = scope.ServiceProvider.GetRequiredService<IMicrocontrollerService>();
-                EmailService.SendEmail(new Domain.EmailMessage { Classroom = "S1" });
                 await Message.StartReceiveMessagesFromSubscriptionAsync(
                 message =>
                 {
-                    if(message.Operation == Domain.OperationMessage.AdministratorRequest)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        var classroom = microcontroller.GetMicrocontrollerById(message.PicId).ClassroomId;
-                        EmailService.SendEmail(new Domain.EmailMessage { Classroom = classroom });
+                        var microcontroller = scope.ServiceProvider.GetRequiredService<IMicrocontrollerService>();
+                        var classroomService = scope.ServiceProvider.GetRequiredService<IClassroomService>();
+                        if (message.Operation == Domain.OperationMessage.AdministratorRequest)
+                        {
+                            var classroom = microcontroller.GetMicrocontrollerById(message.PicId).ClassroomId;
+                            EmailService.SendEmail(new Domain.EmailMessage { Classroom = classroom });
+                        }
                     }
                 }, "email");
-            }
+    
 
         }
 

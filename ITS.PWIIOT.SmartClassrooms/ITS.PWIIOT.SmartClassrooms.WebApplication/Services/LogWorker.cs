@@ -26,14 +26,18 @@ namespace ITS.PWIIOT.SmartClassrooms.WebApplication.Services
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-                var logservice = scope.ServiceProvider.GetRequiredService<ILogService>();
                 await Message.StartReceiveMessagesFromSubscriptionAsync(
                 message =>
                 {
-                    if(message.Operation == Domain.OperationMessage.Log)
+                    using(var scope = _serviceScopeFactory.CreateScope())
                     {
-                        logservice.Insert(message.Message);
+                        var logservice = scope.ServiceProvider.GetRequiredService<ILogService>();
+                        if (message.Operation == Domain.OperationMessage.Log)
+                        {
+                            logservice.Insert(message.Message);
+                        }
                     }
+                 
                 }, "log");
             }
 

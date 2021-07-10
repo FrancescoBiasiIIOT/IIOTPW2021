@@ -24,7 +24,15 @@ namespace ITS.PWIIOT.SmartClassrooms.ApplicationCore.Email_services
         {
             try
             {
-          
+                var message = new MimeMessage();
+                var emailSender = "francesco.biasi@stud.tecnicosuperiorekennedy.it";
+                var passwordSender = "";
+                var host = "smtp.gmail.com";
+                var port = 25;
+                var emailReceiver = "biasifrancesco3@gmail.com";
+                message.From.Add(new MailboxAddress("Francesco", emailSender));
+                message.To.Add(new MailboxAddress("Francesco Biasi", emailReceiver));
+                message.Subject = "Richiesta";
 
                 message.Body = new TextPart("plain")
                 {

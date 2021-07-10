@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ITS.PWIIOT.SmartClassrooms.Domain
 {
-    [Table("Log")]
+    [Table("Logs")]
     public class Log : EntityBase<int>
     {
         public string Message { get; set; }

@@ -16,7 +16,7 @@ namespace ITS.PWIIOT.SmartClassrooms.Domain
 
     public enum OperationMessage
     {
-        AdministratorRequest = 0,
+        AdministratorRequest = 2,
         Log = 10
     }
 }
