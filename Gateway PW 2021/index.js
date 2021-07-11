@@ -2,16 +2,16 @@ const ByteLength = require('@serialport/parser-byte-length')
 
 const SerialPort = require('serialport')
 const DeviceId = 100;
-const port = new SerialPort('COM9', {
+const port = new SerialPort('COM10', {
   baudRate: 9600
 })     
-
+ 
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var Parser = require("binary-parser").Parser;
 const parser = port.pipe(new ByteLength({length: 4}))
-var connectionString =  'HostName=ProjectWorkHub.azure-devices.net;DeviceId=TestDato;SharedAccessKey=NbF6zU6Vbjf9G8PRuvp8DwQRO8gFTh27L19KuHrW7/k=';
+var connectionString =  '';
 
 var client = clientFromConnectionString(connectionString);
 
@@ -58,12 +58,17 @@ client.on('message', function (msg) {
     client.sendEvent(new Message(JSON.stringify(messageToSend)));
      
   })   
-        
+  var messageToSend = {
+    PicId : 11,
+    Operation : 2
+  };
+  console.log(messageToSend);
+  client.sendEvent(new Message(JSON.stringify(messageToSend)));
 
   port.on('error', function(err) {
     var message = {
-      Operation : 10,
-      Message : err.message
-    }
-    client.sendEvent(new Message(JSON.stringify(message)));
+      Operation : 10, 
+      Message : err.message 
+    } 
+   client.sendEvent(new Message(JSON.stringify(message)));
   })
