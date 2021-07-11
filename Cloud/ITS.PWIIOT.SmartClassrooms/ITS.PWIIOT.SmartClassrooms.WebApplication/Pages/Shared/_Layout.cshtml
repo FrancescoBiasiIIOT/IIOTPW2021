@@ -1,0 +1,51 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ITS.PWIIOT.SmartClassrooms.WebApplication</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/fontawesome/css/all.css" rel='stylesheet' />
+    <link href="~/fullcalendar/main.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    <link href="~/fontawesome/css/all.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <h1><a href="index.html" class="logo">Smart Classrooms</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a asp-page="Classrooms/Overview"><span class="fa fa-home mr-3"></span> Overview</a>
+                </li>
+                <li>
+                    <a asp-page="/Index"><span class="fa fa-user mr-3"></span> Esci</a>
+                </li>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+          @RenderBody();
+        </div>
+    </div>
+
+
+    <script src="~/fullcalendar/main.js"></script>
+    <script src="~/fullcalendar/locales/it.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/layout.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
