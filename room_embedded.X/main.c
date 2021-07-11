@@ -1,6 +1,6 @@
 #define PinguinoID 0x0B
 #define GatewayID 0x64
-#define PinguinoName "L10\n"
+#define PinguinoName "S1\n"
 
 // DEVCFG3
 #pragma config USERID = 0xFFFF          // Enter Hexadecimal value (Enter Hexadecimal value)
@@ -71,7 +71,8 @@ int main(void)
     initUART();
     initClassTimer();
     
-    printString("AULA LIBERA\n");
+    printString(PinguinoName);
+    printString(" - AULA LIBERA\n");
     
     while(1){
         if(processMsgFlag){
@@ -93,7 +94,8 @@ void updateTime() {
         tmr3Count = 0;
         clearLcd();
         goToRow(1);
-        printString("AULA LIBERA\n");
+        printString(PinguinoName);
+        printString(" - AULA LIBERA\n");
     } else {
         updateTimeFlag = 0;
         tmr3Count = 0;
