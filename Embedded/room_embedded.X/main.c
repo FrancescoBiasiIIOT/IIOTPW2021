@@ -63,21 +63,28 @@ void checkBtn();
 
 int main(void)
 {
+    //Imposta tutte le porte analogiche come digitali
     AD1PCFG = 0xFFFF;
+    
+    //Imposta A0 come input (pulsante)
     TRISBbits.TRISB1 = 1;
+    
+    //Imposta postscaler a 0
     OSCCONbits.PBDIV = 0;
     
     initLcd();
     initUART();
-    initClassTimer();
+    initClassTimer(); //Timer che viene usato per far scorrere il tempo rimanente
     
     printString("AULA LIBERA\n");
     
     while(1){
+        //Se l'UART Interrupt ha segnalato di avviare l'elaborazione del messaggio
         if(processMsgFlag){
             processMsgFlag = 0;
             processMsg();
         }
+        //Se l'interrupt di Timer 3 ha segnalato che è passato un minuto
         if(updateTimeFlag){
             updateTime();
         }
@@ -85,6 +92,8 @@ int main(void)
     }
 }
 
+//Questa funzione scala la variabile timeLeftNum di 1 e poi converte il numero in stringa
+//salvandolo in timeLeftStr
 void updateTime() {
     if (timeLeftNum <= 1) {
         T3CONbits.TON = 0;
@@ -98,7 +107,7 @@ void updateTime() {
         updateTimeFlag = 0;
         tmr3Count = 0;
         timeLeftNum--;
-        convertDuration();
+        convertDuration(); //Ricalcola la stringa timeLeftStr in base all'attuale valore di timeLeftNum
         goToRow(1);
         goToRow(4);
         printString(timeLeftStr);
@@ -149,7 +158,7 @@ void checkBtn() {
 void initUART(){
     //UART sending config
     U1MODEbits.BRGH = 0;
-    U1BRG = 63;
+    U1BRG = 63; // 9600 bit/s
     U1MODEbits.PDSEL = 0;
     U1MODEbits.STSEL = 0;
     U1STAbits.UTXEN = 1;
@@ -220,12 +229,9 @@ void processMsg(){
     switch(msgType){
         case 0: fillDisplay();
                 break;
-        case 1:
-                break;
-        case 2:
-                break;
-        case 3:
-                break;
+                
+        //Tutti gli altri tipi sono per il gateway
+        //In teoria il codice non dovrebbe mai arrivare a questo punto
         default: break;
     }
 }
@@ -247,7 +253,7 @@ void initClassTimer(){
 }
 
 void processPackage(){
-    //Come da doc, segnalo tramite questa variabile che sto ricevendo
+    //Segnalo tramite questa variabile che sto ricevendo
     uartJobNow = 2;
     if(IFS0bits.U1RXIF){
         //Salvo il byte ricevuto
@@ -292,6 +298,7 @@ void __ISR(_UART_1_VECTOR, IPL7SRS) U1RXInterrupt(void){
         processPackage();
     }
     else{
+        /*Controllo collisioni non ancora implementato*/
         //Pacchetto inviato da questa stessa scheda, da controllare
         //if(U1RXREG != U1TXREG)
             //Collisione!!

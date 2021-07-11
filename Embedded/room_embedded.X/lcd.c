@@ -47,11 +47,6 @@ void initLcd(){
     sendConfig(Clear_CMD);
 }
 
-void sendByte(char a, char b, char c, char d, char e, char f, char g, char h){
-    sendCommand(1,0,a,b,c,d);
-    sendCommand(1,0,e,f,g,h);
-}
-
 void sendCommand(char rs, char rw, char db7, char db6, char db5, char db4){
     PORTD = 0;
     PORTB = 0;
@@ -68,6 +63,11 @@ void sendCommand(char rs, char rw, char db7, char db6, char db5, char db4){
         sleepLcd(50);
     
     return;
+}
+
+void sendByte(char a, char b, char c, char d, char e, char f, char g, char h){
+    sendCommand(1,0,a,b,c,d);
+    sendCommand(1,0,e,f,g,h);
 }
 
 void sendConfig(char databits){
